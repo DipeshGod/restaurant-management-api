@@ -13,6 +13,10 @@ app.use(cors());
 app.use(express.json());
 
 //routes
+app.get('/', (req, res) => {
+  res.send('Hello Restaurant management api');
+});
+
 app.use('/api/user', userRouter);
 
 const PORT = process.env.PORT || 5000;
