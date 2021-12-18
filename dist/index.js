@@ -13,6 +13,9 @@ app.use((0, cors_1.default)());
 // Body parser
 app.use(express_1.default.json());
 //routes
+app.get('/', function (req, res) {
+    res.send('Hello Restaurant management api');
+});
 app.use('/api/user', user_1.userRouter);
 var PORT = process.env.PORT || 5000;
 var server = app.listen(PORT, function () {
