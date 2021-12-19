@@ -10,6 +10,14 @@ router.get('/', (_, res: Response) => {
       '/user': {
         method: 'GET',
         description: 'Get all users',
+        POST: {
+          allowed: true,
+          body: {
+            name: 'string (required)',
+            password: 'string (required)',
+            role: 'string array (required)',
+          },
+        },
       },
       '/auth/login': {
         method: 'POST',

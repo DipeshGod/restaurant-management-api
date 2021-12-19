@@ -35,38 +35,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginController = void 0;
+exports.createUserController = void 0;
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
-var validatePassword = function (encryptedPassword, checkString) { };
-var loginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, err_1;
+var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
-            case 1:
-                user = _a.sent();
-                if (!req.body.name || !req.body.password) {
-                    return [2 /*return*/, res.status(400).json({
-                            msg: 'Please provide valid name and password',
-                        })];
-                }
-                if (!user) {
-                    return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
-                }
-                if (user.password !== req.body.password) {
-                    return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
-                }
-                res.json({ msg: 'login successfull' });
-                return [3 /*break*/, 3];
-            case 2:
-                err_1 = _a.sent();
-                console.log('Error in loginController: ', err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+            case 0: return [4 /*yield*/, bcryptjs_1.default.hash(password, 10)];
+            case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-exports.loginController = loginController;
+var createUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, encryptedPassword, newUser, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 4, , 5]);
+                if (!req.body.name || !req.body.password || !req.body.role) {
+                    return [2 /*return*/, res.status(400).json({
+                            msg: 'Please provide valid name, password and role',
+                        })];
+                }
+                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+            case 1:
+                user = _a.sent();
+                if (user) {
+                    return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
+                }
+                return [4 /*yield*/, encryptPassword(req.body.password)];
+            case 2:
+                encryptedPassword = _a.sent();
+                newUser = new User_1.User({
+                    name: req.body.name,
+                    password: encryptedPassword,
+                    role: req.body.role,
+                });
+                return [4 /*yield*/, newUser.save()];
+            case 3:
+                _a.sent();
+                res.json({ msg: 'User created successfully', user: newUser });
+                return [3 /*break*/, 5];
+            case 4:
+                err_1 = _a.sent();
+                console.log('Error in createUserController: ', err_1);
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); };
+exports.createUserController = createUserController;

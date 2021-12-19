@@ -1,13 +1,18 @@
 import { Request, Response } from 'express';
-import { IUser } from '../../interfaces/models/User';
+import { ILoginRequestBody } from '../../interfaces/requests/LoginRequestBody';
 import { User } from '../../models/User';
 
-const loginController = async (req: Request<{}, {}, IUser>, res: Response) => {
+const validatePassword = (encryptedPassword: string, checkString: string) => {};
+
+const loginController = async (
+  req: Request<{}, {}, ILoginRequestBody>,
+  res: Response
+) => {
   try {
     const user = await User.findOne({ name: req.body.name });
     if (!req.body.name || !req.body.password) {
       return res.status(400).json({
-        message: 'Please provide valid name and password',
+        msg: 'Please provide valid name and password',
       });
     }
     if (!user) {
