@@ -1,9 +1,9 @@
 import { Router } from 'express';
+import { getUserController } from '../controllers/user/getUserController';
+import { User } from '../models/User';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json({ msg: 'this is user route' });
-});
+router.get('/', getUserController);
 
 export { router as userRouter };
