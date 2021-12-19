@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRouter = void 0;
 var express_1 = require("express");
+var getUserController_1 = require("../controllers/user/getUserController");
 var router = (0, express_1.Router)();
 exports.userRouter = router;
-router.get('/', function (req, res) {
-    res.json({ msg: 'this is user route' });
-});
+router.get('/', getUserController_1.getUserController);

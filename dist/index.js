@@ -7,19 +7,32 @@ var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var dotenv_1 = __importDefault(require("dotenv"));
 var user_1 = require("./routes/user");
+var mongoose_1 = __importDefault(require("mongoose"));
 dotenv_1.default.config();
 var app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 // Body parser
 app.use(express_1.default.json());
-//routes
+//api docs
 app.get('/', function (req, res) {
-    res.send('Hello Restaurant management api');
+    res.send({
+        rootURL: 'http://restaurantmanagementapi-env.eba-eujhhwnw.ap-south-1.elasticbeanstalk.com/api',
+        endpoints: {
+            '/users': {
+                GET: 'Get all users',
+            },
+        },
+    });
 });
+//routes
 app.use('/api/user', user_1.userRouter);
 var PORT = process.env.PORT || 5000;
-var server = app.listen(PORT, function () {
-    console.log("Server running on port ".concat(PORT));
+var server;
+//mongdb connection
+mongoose_1.default.connect(process.env.ATLAS_URI, {}, function () {
+    server = app.listen(PORT, function () {
+        console.log("Server running on port ".concat(PORT));
+    });
 });
 // Handle unhandled promise rejections
 process.on('unhandledRejection', function (err, promise) {
