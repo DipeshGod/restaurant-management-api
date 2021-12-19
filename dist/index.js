@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
     res.send({
         rootURL: 'http://restaurantmanagementapi-env.eba-eujhhwnw.ap-south-1.elasticbeanstalk.com/api',
         endpoints: {
-            '/users': {
+            '/user': {
                 GET: 'Get all users',
             },
         },
