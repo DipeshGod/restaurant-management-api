@@ -36,25 +36,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserController = void 0;
+exports.loginController = void 0;
 var User_1 = require("../../models/User");
-var getUserController = function (_, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, err_1;
+var loginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, User_1.User.find({})];
+                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
             case 1:
-                users = _a.sent();
-                res.json({ users: users });
+                user = _a.sent();
+                if (!req.body.name || !req.body.password) {
+                    return [2 /*return*/, res.status(400).json({
+                            message: 'Please provide valid name and password',
+                        })];
+                }
+                if (!user) {
+                    return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
+                }
+                if (user.password !== req.body.password) {
+                    return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
+                }
+                res.json({ msg: 'login successfull' });
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                console.log('Error in getUserController: ', err_1);
+                console.log('Error in loginController: ', err_1);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.getUserController = getUserController;
+exports.loginController = loginController;

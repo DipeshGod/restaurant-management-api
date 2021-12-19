@@ -8,24 +8,18 @@ var cors_1 = __importDefault(require("cors"));
 var dotenv_1 = __importDefault(require("dotenv"));
 var user_1 = require("./routes/user");
 var mongoose_1 = __importDefault(require("mongoose"));
+var auth_1 = require("./routes/auth");
+var apiDoc_1 = require("./routes/apiDoc");
 dotenv_1.default.config();
 var app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 // Body parser
 app.use(express_1.default.json());
 //api docs
-app.get('/', function (req, res) {
-    res.send({
-        rootURL: 'http://restaurantmanagementapi-env.eba-eujhhwnw.ap-south-1.elasticbeanstalk.com/api',
-        endpoints: {
-            '/user': {
-                GET: 'Get all users',
-            },
-        },
-    });
-});
+app.get('/', apiDoc_1.apiDocRouter);
 //routes
 app.use('/api/user', user_1.userRouter);
+app.use('/api/auth', auth_1.authRouter);
 var PORT = process.env.PORT || 5000;
 var server;
 //mongdb connection

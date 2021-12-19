@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { User } from '../../models/User';
 
-const getUserController = async (req: Request, res: Response) => {
+const getUserController = async (_: Request, res: Response) => {
   try {
     const users = await User.find({});
     res.json({ users });

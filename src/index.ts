@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
+import { authRouter } from './routes/auth';
+import { apiDocRouter } from './routes/apiDoc';
 
 dotenv.config();
 
@@ -14,20 +16,11 @@ app.use(cors());
 app.use(express.json());
 
 //api docs
-app.get('/', (req, res) => {
-  res.send({
-    rootURL:
-      'http://restaurantmanagementapi-env.eba-eujhhwnw.ap-south-1.elasticbeanstalk.com/api',
-    endpoints: {
-      '/user': {
-        GET: 'Get all users',
-      },
-    },
-  });
-});
+app.get('/', apiDocRouter);
 
 //routes
 app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
 
 const PORT = process.env.PORT || 5000;
 
