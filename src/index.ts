@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     rootURL:
       'http://restaurantmanagementapi-env.eba-eujhhwnw.ap-south-1.elasticbeanstalk.com/api',
     endpoints: {
-      '/users': {
+      '/user': {
         GET: 'Get all users',
       },
     },
