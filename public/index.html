@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Automation Api Docs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="text-center my-4">Restaurant Automation Api Documentation</h2>
+
+    <p class="mb-4">Root URL : <span
+        class="highlight">http://restaurantmanagementapi-env.eba-eujhhwnw.ap-south-1.elasticbeanstalk.com/api</span></p>
+
+    <h3 class="mb-4">API ENDPOINTS</h3>
+
+
+    <div class="accordion" id="accordionExample">
+
+      <!-- user api docs -->
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              User Management
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <h6>Create New User</h6>
+            <h6 class="font-weight-normal">endpoint : /user</h6>
+            <h6 class="font-weight-normal">method : POST</h6>
+            <h6 class="font-weight-normal">permissions : [ 'owner' ]</h6>
+            <h6 class="font-weight-normal">body: name ( string , required ) , password ( string , required ) , role (
+              array
+              , required )</h6>
+          </div>
+          <div class="card-body">
+            <h6>Get All Users</h6>
+            <h6 class="font-weight-normal">endpoint : /user</h6>
+            <h6 class="font-weight-normal">method : GET</h6>
+            <h6 class="font-weight-normal">permissions : [ 'owner' ]</h6>
+          </div>
+        </div>
+      </div>
+      <!-- user api docs -->
+
+      <!-- authentication api docs -->
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+              aria-expanded="true" aria-controls="collapseTwo">
+              Authentication and Authorization
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body">
+            <h6>User Login</h6>
+            <h6 class="font-weight-normal">endpoint : /auth/login</h6>
+            <h6 class="font-weight-normal">method : POST</h6>
+            <h6 class="font-weight-normal">permissions : ALL</h6>
+            <h6 class="font-weight-normal">body: name ( string , required ), password ( string , required )</h6>
+          </div>
+        </div>
+      </div>
+      <!-- authentication api docs -->
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

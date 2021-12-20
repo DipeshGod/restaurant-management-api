@@ -5,7 +5,6 @@ import rateLimit from 'express-rate-limit';
 import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
-import { apiDocRouter } from './routes/apiDoc';
 
 //load environment variables
 dotenv.config();
@@ -13,23 +12,27 @@ dotenv.config();
 //initialize express
 const app = express();
 
-//rate limit middleware
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 2000,
-});
-app.use(limiter);
-
 //cors middleware
 app.use(cors());
+
+console.log(__dirname);
+
+// allow static files from public folder
+app.use(express.static('public'));
 
 // Body parser
 app.use(express.json());
 
 //api docs
-app.get('/', apiDocRouter);
+app.get('/', (req, res) => res.render('/index.html'));
 
 //routes
+//rate limit middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 2000,
+});
+app.use('/api/', limiter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 

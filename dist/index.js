@@ -6,18 +6,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var dotenv_1 = __importDefault(require("dotenv"));
+var express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 var user_1 = require("./routes/user");
 var mongoose_1 = __importDefault(require("mongoose"));
 var auth_1 = require("./routes/auth");
-var apiDoc_1 = require("./routes/apiDoc");
+//load environment variables
 dotenv_1.default.config();
+//initialize express
 var app = (0, express_1.default)();
+//cors middleware
 app.use((0, cors_1.default)());
+console.log(__dirname);
+// allow static files from public folder
+app.use(express_1.default.static('public'));
 // Body parser
 app.use(express_1.default.json());
 //api docs
-app.get('/', apiDoc_1.apiDocRouter);
+app.get('/', function (req, res) { return res.render('/index.html'); });
 //routes
+//rate limit middleware
+var limiter = (0, express_rate_limit_1.default)({
+    windowMs: 15 * 60 * 1000,
+    max: 2000,
+});
+app.use('/api/', limiter);
 app.use('/api/user', user_1.userRouter);
 app.use('/api/auth', auth_1.authRouter);
 var PORT = process.env.PORT || 5000;

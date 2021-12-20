@@ -62,6 +62,7 @@ exports.loginController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
 var jwt = __importStar(require("jsonwebtoken"));
+var validator_1 = require("../../utils/validator");
 //function to validate hash to the user input
 var validatePassword = function (encryptedPassword, checkString) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
@@ -81,32 +82,32 @@ var loginController = function (req, res) { return __awaiter(void 0, void 0, voi
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+                _a.trys.push([0, 4, , 5]);
+                //validate the request data
+                return [4 /*yield*/, (0, validator_1.loginValidator)(req.body)];
             case 1:
+                //validate the request data
+                _a.sent();
+                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+            case 2:
                 user = _a.sent();
-                if (!req.body.name || !req.body.password) {
-                    return [2 /*return*/, res.status(400).json({
-                            msg: 'Please provide valid name and password',
-                        })];
-                }
                 if (!user) {
                     return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
                 }
                 return [4 /*yield*/, validatePassword(user.password, req.body.password)];
-            case 2:
+            case 3:
                 isValidPassword = _a.sent();
                 if (isValidPassword === false) {
                     return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
                 }
                 token = assignToken(user);
                 res.json({ msg: 'login successfull', token: token });
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 5];
+            case 4:
                 err_1 = _a.sent();
-                console.log('Error in loginController: ', err_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                res.status(400).json({ err: err_1 });
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };
