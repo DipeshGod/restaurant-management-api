@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { ILoginRequestBody } from '../../interfaces/requests/LoginRequestBody';
 import { User } from '../../models/User';
 import * as jwt from 'jsonwebtoken';
+import { loginValidator } from '../../utils/validator';
 
 //function to validate hash to the user input
 const validatePassword = async (
@@ -23,12 +24,11 @@ const loginController = async (
   res: Response
 ) => {
   try {
+    //validate the request data
+    await loginValidator(req.body);
+
     const user = await User.findOne({ name: req.body.name });
-    if (!req.body.name || !req.body.password) {
-      return res.status(400).json({
-        msg: 'Please provide valid name and password',
-      });
-    }
+
     if (!user) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
@@ -44,7 +44,7 @@ const loginController = async (
     const token = assignToken(user);
     res.json({ msg: 'login successfull', token: token });
   } catch (err) {
-    console.log('Error in loginController: ', err);
+    res.status(400).json({ err });
   }
 };
 

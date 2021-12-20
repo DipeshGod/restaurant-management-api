@@ -1,15 +1,26 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
 import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
 import { apiDocRouter } from './routes/apiDoc';
 
+//load environment variables
 dotenv.config();
 
+//initialize express
 const app = express();
 
+//rate limit middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 2000,
+});
+app.use(limiter);
+
+//cors middleware
 app.use(cors());
 
 // Body parser
