@@ -1,8 +1,22 @@
 import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
 import { ILoginRequestBody } from '../../interfaces/requests/LoginRequestBody';
 import { User } from '../../models/User';
+import * as jwt from 'jsonwebtoken';
 
-const validatePassword = (encryptedPassword: string, checkString: string) => {};
+//function to validate hash to the user input
+const validatePassword = async (
+  encryptedPassword: string,
+  checkString: string
+) => {
+  return await bcrypt.compare(checkString, encryptedPassword);
+};
+
+//function to assign token to the user on successful login
+const assignToken = (user: any) => {
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET!);
+  return token;
+};
 
 const loginController = async (
   req: Request<{}, {}, ILoginRequestBody>,
@@ -18,10 +32,17 @@ const loginController = async (
     if (!user) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
-    if (user.password !== req.body.password) {
+
+    const isValidPassword = await validatePassword(
+      user.password,
+      req.body.password
+    );
+
+    if (isValidPassword === false) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
-    res.json({ msg: 'login successfull' });
+    const token = assignToken(user);
+    res.json({ msg: 'login successfull', token: token });
   } catch (err) {
     console.log('Error in loginController: ', err);
   }
