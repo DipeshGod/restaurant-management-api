@@ -2,12 +2,16 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { User } from '../../models/User';
 import { createUserValidator } from '../../utils/validator';
+import { ICreateUserRequestBody } from '../../interfaces/requests/CreateUserRequestBody';
 
 const encryptPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
 };
 
-const createUserController = async (req: Request, res: Response) => {
+const createUserController = async (
+  req: Request<{}, {}, ICreateUserRequestBody>,
+  res: Response
+) => {
   try {
     //validate the request data
     await createUserValidator(req.body);
@@ -25,6 +29,7 @@ const createUserController = async (req: Request, res: Response) => {
       name: req.body.name,
       password: encryptedPassword,
       role: req.body.role,
+      salary: req.body.salary | 0,
     });
 
     await newUser.save();
