@@ -29,6 +29,11 @@ var userSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    salary: {
+        type: Number,
+    },
+}, {
+    timestamps: true,
 });
 var User = mongoose_1.default.model('user', userSchema);
 exports.User = User;
