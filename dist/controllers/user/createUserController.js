@@ -75,6 +75,7 @@ var createUserController = function (req, res) { return __awaiter(void 0, void 0
                     name: req.body.name,
                     password: encryptedPassword,
                     role: req.body.role,
+                    salary: req.body.salary | 0,
                 });
                 return [4 /*yield*/, newUser.save()];
             case 4:

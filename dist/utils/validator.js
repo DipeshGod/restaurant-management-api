@@ -49,6 +49,7 @@ var createUserValidator = function (data) { return __awaiter(void 0, void 0, voi
                 createUserSchema = joi_1.default.object({
                     name: joi_1.default.string().required().min(5).max(30),
                     password: joi_1.default.string().required().min(5).max(30),
+                    salary: joi_1.default.number().optional().min(10000),
                     role: joi_1.default
                         .array()
                         .items(joi_1.default
