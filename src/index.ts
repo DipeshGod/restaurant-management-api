@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
+import path from 'path';
 
 //load environment variables
 dotenv.config();
@@ -15,15 +16,14 @@ const app = express();
 //cors middleware
 app.use(cors());
 
-console.log(__dirname);
-
 // allow static files from public folder
 app.use(express.static('public'));
 
 // Body parser
 app.use(express.json());
 
-//api docs
+//api docs\
+app.get('/infra', (req, res) => res.render('/infra.html'));
 app.get('/', (req, res) => res.render('/index.html'));
 
 //routes

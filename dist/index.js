@@ -16,12 +16,12 @@ dotenv_1.default.config();
 var app = (0, express_1.default)();
 //cors middleware
 app.use((0, cors_1.default)());
-console.log(__dirname);
 // allow static files from public folder
 app.use(express_1.default.static('public'));
 // Body parser
 app.use(express_1.default.json());
-//api docs
+//api docs\
+app.get('/infra', function (req, res) { return res.render('/infra.html'); });
 app.get('/', function (req, res) { return res.render('/index.html'); });
 //routes
 //rate limit middleware
