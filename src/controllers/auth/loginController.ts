@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { ILoginRequestBody } from '../../interfaces/requests/LoginRequestBody';
+import { ILoginRequestBody } from '../../interfaces/requests/Auth';
 import { User } from '../../models/User';
 import * as jwt from 'jsonwebtoken';
-import { loginValidator } from '../../utils/validator';
+import { loginValidator } from '../../utils/authValidator';
 
 //function to validate hash to the user input
 const validatePassword = async (

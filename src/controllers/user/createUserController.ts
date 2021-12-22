@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { User } from '../../models/User';
-import { createUserValidator } from '../../utils/validator';
-import { ICreateUserRequestBody } from '../../interfaces/requests/CreateUserRequestBody';
+import { createUserValidator } from '../../utils/userValidator';
+import { ICreateUserRequestBody } from '../../interfaces/requests/User';
 
 const encryptPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);

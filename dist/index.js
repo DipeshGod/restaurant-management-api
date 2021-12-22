@@ -27,7 +27,7 @@ app.get('/', function (req, res) { return res.render('/index.html'); });
 //rate limit middleware
 var limiter = (0, express_rate_limit_1.default)({
     windowMs: 15 * 60 * 1000,
-    max: 2000,
+    max: 1000,
 });
 app.use('/api/', limiter);
 app.use('/api/user', user_1.userRouter);

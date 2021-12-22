@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUserController = void 0;
+exports.updateUserController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
 var userValidator_1 = require("../../utils/userValidator");
@@ -51,43 +51,48 @@ var encryptPassword = function (password) { return __awaiter(void 0, void 0, voi
         }
     });
 }); };
-var createUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, encryptedPassword, newUser, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+var updateUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, encryptedPassword, err_1;
+    var _a, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
+                _c.trys.push([0, 5, , 6]);
                 //validate the request data
-                return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
+                return [4 /*yield*/, (0, userValidator_1.updateUserValidator)(req.body)];
             case 1:
                 //validate the request data
-                _a.sent();
-                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+                _c.sent();
+                return [4 /*yield*/, User_1.User.findById(req.body.id)];
             case 2:
-                user = _a.sent();
-                if (user) {
-                    return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
+                user = _c.sent();
+                console.log(user);
+                if (!user) {
+                    res.status(400).json({ msg: 'user doesnt exist' });
                 }
+                encryptedPassword = '';
+                if (!req.body.password) return [3 /*break*/, 4];
                 return [4 /*yield*/, encryptPassword(req.body.password)];
             case 3:
-                encryptedPassword = _a.sent();
-                newUser = new User_1.User({
-                    name: req.body.name,
-                    password: encryptedPassword,
-                    role: req.body.role,
-                    salary: req.body.salary | 0,
-                });
-                return [4 /*yield*/, newUser.save()];
+                encryptedPassword = _c.sent();
+                _c.label = 4;
             case 4:
-                _a.sent();
-                res.json({ msg: 'User created successfully', user: newUser });
+                //update user
+                if (user) {
+                    user.name = req.body.name || (user === null || user === void 0 ? void 0 : user.name);
+                    user.password =
+                        encryptedPassword.length > 0 ? encryptedPassword : user === null || user === void 0 ? void 0 : user.password;
+                    user.role = ((_a = req.body) === null || _a === void 0 ? void 0 : _a.role) || user.role;
+                    user.salary = ((_b = req.body) === null || _b === void 0 ? void 0 : _b.salary) || 0;
+                }
+                res.json({ msg: 'User updated successfully', user: user });
                 return [3 /*break*/, 6];
             case 5:
-                err_1 = _a.sent();
+                err_1 = _c.sent();
                 res.status(400).json({ err: err_1 });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }
     });
 }); };
-exports.createUserController = createUserController;
+exports.updateUserController = updateUserController;

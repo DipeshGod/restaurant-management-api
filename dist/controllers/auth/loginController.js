@@ -62,7 +62,7 @@ exports.loginController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
 var jwt = __importStar(require("jsonwebtoken"));
-var validator_1 = require("../../utils/validator");
+var authValidator_1 = require("../../utils/authValidator");
 //function to validate hash to the user input
 var validatePassword = function (encryptedPassword, checkString) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
@@ -84,7 +84,7 @@ var loginController = function (req, res) { return __awaiter(void 0, void 0, voi
             case 0:
                 _a.trys.push([0, 4, , 5]);
                 //validate the request data
-                return [4 /*yield*/, (0, validator_1.loginValidator)(req.body)];
+                return [4 /*yield*/, (0, authValidator_1.loginValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();

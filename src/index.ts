@@ -30,7 +30,7 @@ app.get('/', (req, res) => res.render('/index.html'));
 //rate limit middleware
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 2000,
+  max: 1000,
 });
 app.use('/api/', limiter);
 app.use('/api/user', userRouter);
