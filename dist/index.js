@@ -10,6 +10,7 @@ var express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 var user_1 = require("./routes/user");
 var mongoose_1 = __importDefault(require("mongoose"));
 var auth_1 = require("./routes/auth");
+var inventory_1 = require("./routes/inventory");
 //load environment variables
 dotenv_1.default.config();
 //initialize express
@@ -32,6 +33,7 @@ var limiter = (0, express_rate_limit_1.default)({
 app.use('/api/', limiter);
 app.use('/api/user', user_1.userRouter);
 app.use('/api/auth', auth_1.authRouter);
+app.use('/api/inventory', inventory_1.inventoryRouter);
 var PORT = process.env.PORT || 5000;
 var server;
 //mongdb connection

@@ -6,6 +6,7 @@ import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
 import path from 'path';
+import { inventoryRouter } from './routes/inventory';
 
 //load environment variables
 dotenv.config();
@@ -35,6 +36,7 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/inventory', inventoryRouter);
 
 const PORT = process.env.PORT || 5000;
 
