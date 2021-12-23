@@ -15,12 +15,16 @@ const isOwner = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const isInventoryManager = async (req: Request, res: Response, next: NextFunction) => {
+const isInventoryManager = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const id = req.user._id;
 
   const user = await User.findById(id);
 
-  if (user?.role.includes('inventoryManager')) {
+  if (user?.role.includes('inventoryManager') || user?.role.includes('owner')) {
     next();
   } else {
     return res.status(401).json({

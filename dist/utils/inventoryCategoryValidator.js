@@ -35,50 +35,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isInventoryManager = exports.isOwner = void 0;
-var User_1 = require("../models/User");
-var isOwner = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
+exports.updateInventoryCategoryValidator = exports.createInventoryCategoryValidator = void 0;
+var joi_1 = __importDefault(require("joi"));
+var createInventoryCategoryValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var inventoryCategorySchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id)];
-            case 1:
-                user = _a.sent();
-                if (user === null || user === void 0 ? void 0 : user.role.includes('owner')) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not owner authorize to access this page',
-                        })];
-                }
-                return [2 /*return*/];
+                inventoryCategorySchema = joi_1.default.object({
+                    name: joi_1.default.string().required().min(3).max(25),
+                });
+                return [4 /*yield*/, inventoryCategorySchema.validateAsync(data)];
+            case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-exports.isOwner = isOwner;
-var isInventoryManager = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
+exports.createInventoryCategoryValidator = createInventoryCategoryValidator;
+var updateInventoryCategoryValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var inventoryCategorySchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id)];
-            case 1:
-                user = _a.sent();
-                if ((user === null || user === void 0 ? void 0 : user.role.includes('inventoryManager')) || (user === null || user === void 0 ? void 0 : user.role.includes('owner'))) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not authorize to access this page',
-                        })];
-                }
-                return [2 /*return*/];
+                inventoryCategorySchema = joi_1.default.object({
+                    name: joi_1.default.string().required().min(3).max(25),
+                    id: joi_1.default.string().required(),
+                });
+                return [4 /*yield*/, inventoryCategorySchema.validateAsync(data)];
+            case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-exports.isInventoryManager = isInventoryManager;
+exports.updateInventoryCategoryValidator = updateInventoryCategoryValidator;

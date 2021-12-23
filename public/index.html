@@ -88,40 +88,45 @@
       </div>
       <!-- authentication api docs -->
 
-      <!-- inventory api docs -->
+      <!-- inventory category api docs -->
       <div class="card">
-        <div class="card-header" id="headingOne">
+        <div class="card-header" id="headingThree">
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-              aria-expanded="true" aria-controls="collapseOne">
-              Inventory Management
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree"
+              aria-expanded="true" aria-controls="collapseThree">
+              Inventory Category Management
             </button>
           </h5>
         </div>
 
-        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseThree" class="collapse hide" aria-labelledby="headingThree" data-parent="#accordionExample">
           <div class="card-body">
-            <h6>Create New Inventory</h6>
-            <h6 class="font-weight-normal">endpoint : /inventory</h6>
+            <h6>Create New Inventory Category</h6>
+            <h6 class="font-weight-normal">endpoint : /inventory_category</h6>
             <h6 class="font-weight-normal">method : POST</h6>
-            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' ]</h6>
-            <h6 class="font-weight-normal">body: inventoryCategory ( string , required ) , itemName ( string , required ) , quatity (number , required ) , measurementUnit (string,array , required), unitRate (number,required)</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
+            <h6 class="font-weight-normal">body: name: ( string , required )
+            </h6>
           </div>
           <div class="card-body">
-            <h6>Get All Inventory</h6>
-            <h6 class="font-weight-normal">endpoint : /inventory</h6>
+            <h6>Get All Inventory Category</h6>
+            <h6 class="font-weight-normal">endpoint : /inventory_category</h6>
             <h6 class="font-weight-normal">method : GET</h6>
-            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' ]</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
           </div>
           <div class="card-body">
-            <h6>Get Inventory by Category</h6>
-            <h6 class="font-weight-normal">endpoint : /inventory/:inventoryCategory</h6>
-            <h6 class="font-weight-normal">method : GET</h6>
-            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' ]</h6>
+            <h6>Update Inventory Category</h6>
+            <h6 class="font-weight-normal">endpoint : /inventory_category</h6>
+            <h6 class="font-weight-normal">method : PUT</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
+            <h6 class="font-weight-normal">body: id ( string , required) , name ( string , required )</h6>
           </div>
         </div>
       </div>
-      <!-- inventory api docs-->
+      <!-- inventory category api docs-->
+
+
+
 
 
     </div>

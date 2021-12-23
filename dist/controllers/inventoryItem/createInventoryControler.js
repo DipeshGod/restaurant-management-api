@@ -36,49 +36,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isInventoryManager = exports.isOwner = void 0;
-var User_1 = require("../models/User");
-var isOwner = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
+exports.createInventoryController = void 0;
+var Inventory_1 = require("../../models/Inventory");
+var InventoryCategory_1 = require("../../models/InventoryCategory");
+var createInventoryController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var inventoryCategory, category, inventory, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id)];
+                _a.trys.push([0, 5, , 6]);
+                return [4 /*yield*/, InventoryCategory_1.InventoryCategory.findOne({
+                        name: req.body.inventoryCategory,
+                    })];
             case 1:
-                user = _a.sent();
-                if (user === null || user === void 0 ? void 0 : user.role.includes('owner')) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not owner authorize to access this page',
-                        })];
-                }
-                return [2 /*return*/];
+                inventoryCategory = _a.sent();
+                if (!!inventoryCategory) return [3 /*break*/, 3];
+                category = new InventoryCategory_1.InventoryCategory({
+                    name: req.body.inventoryCategory,
+                });
+                return [4 /*yield*/, category.save()];
+            case 2:
+                _a.sent();
+                _a.label = 3;
+            case 3:
+                inventory = new Inventory_1.Inventory({
+                    inventoryCategory: inventoryCategory._id,
+                    itemName: req.body.itemName,
+                    quantity: req.body.quantity,
+                    measurementUnit: req.body.measurementUnit,
+                    amount: req.body.quantity * req.body.unitRate,
+                    unitRate: req.body.unitRate,
+                });
+                return [4 /*yield*/, inventory.save()];
+            case 4:
+                _a.sent();
+                res.json({ msg: 'Inventory created successfully', inventory: inventory });
+                return [3 /*break*/, 6];
+            case 5:
+                err_1 = _a.sent();
+                res.status(400).json({ err: err_1 });
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };
-exports.isOwner = isOwner;
-var isInventoryManager = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id)];
-            case 1:
-                user = _a.sent();
-                if ((user === null || user === void 0 ? void 0 : user.role.includes('inventoryManager')) || (user === null || user === void 0 ? void 0 : user.role.includes('owner'))) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not authorize to access this page',
-                        })];
-                }
-                return [2 /*return*/];
-        }
-    });
-}); };
-exports.isInventoryManager = isInventoryManager;
+exports.createInventoryController = createInventoryController;

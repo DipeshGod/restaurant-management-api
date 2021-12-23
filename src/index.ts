@@ -5,8 +5,7 @@ import rateLimit from 'express-rate-limit';
 import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
-import path from 'path';
-import { inventoryRouter } from './routes/inventory';
+import { inventoryCategoryRouter } from './routes/inventoryCategory';
 
 //load environment variables
 dotenv.config();
@@ -36,7 +35,8 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/inventory', inventoryRouter);
+app.use('/api/inventory_category', inventoryCategoryRouter);
+// app.use('/api/inventory_item', inventoryRouter);
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.inventoryCategoryRouter = void 0;
+var express_1 = require("express");
+var createInventoryCategoryController_1 = require("../controllers/inventoryCategory/createInventoryCategoryController");
+var getInventoryCategoryController_1 = require("../controllers/inventoryCategory/getInventoryCategoryController");
+var authenticate_1 = require("../middlewares/authenticate");
+var authorization_1 = require("../middlewares/authorization");
+var updateInventoryCategoryController_1 = require("../controllers/inventoryCategory/updateInventoryCategoryController");
+var router = (0, express_1.Router)();
+exports.inventoryCategoryRouter = router;
+router.get('/', [authenticate_1.authentication, authorization_1.isInventoryManager], getInventoryCategoryController_1.getInventoryCategoryController);
+router.post('/', [authenticate_1.authentication, authorization_1.isInventoryManager], createInventoryCategoryController_1.createInventoryCategoryController);
+router.put('/', [authenticate_1.authentication, authorization_1.isInventoryManager], updateInventoryCategoryController_1.updateInventoryCategoryController);
