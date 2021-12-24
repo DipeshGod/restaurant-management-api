@@ -1,39 +1,37 @@
 import { Request, Response } from 'express';
-import { ICreateInventoryRequestBody } from '../../interfaces/requests/Inventory';
-import { Inventory } from '../../models/Inventory';
-import { InventoryCategory } from '../../models/InventoryCategory';
+import mongoose from 'mongoose';
+import { ICreateInventoryItemRequestBody } from '../../interfaces/requests/InventoryItem';
+import { InventoryItem } from '../../models/InventoryItem';
 
-const createInventoryController = async (
-  req: Request<{}, {}, ICreateInventoryRequestBody>,
+const createInventoryItemController = async (
+  req: Request<{}, {}, ICreateInventoryItemRequestBody>,
   res: Response
 ) => {
   try {
-    //add inventory category model
-    const inventoryCategory = await InventoryCategory.findOne({
-      name: req.body.inventoryCategory,
-    });
-    if (!inventoryCategory) {
-      const category = new InventoryCategory({
-        name: req.body.inventoryCategory,
+    //1. validate request body
+    //2. check if the item name already exists and return error if it does
+    const item = await InventoryItem.findOne({ itemName: req.body.itemName });
+    if (item) {
+      return res.status(400).json({
+        message: 'Item already exists',
       });
-      await category.save();
     }
-
-    //create new inventory model
-    const inventory = new Inventory({
-      inventoryCategory: inventoryCategory!._id,
-      itemName: req.body.itemName,
-      quantity: req.body.quantity,
-      measurementUnit: req.body.measurementUnit,
-      amount: req.body.quantity * req.body.unitRate,
-      unitRate: req.body.unitRate,
+    //(perform operation 3 and 4 as transaction)
+    const session = await mongoose.startSession();
+    //3. if the item name does not exist, create the item
+    await session.withTransaction(() => {
+      return InventoryItem.create(req.body);
     });
-
-    await inventory.save();
-    res.json({ msg: 'Inventory created successfully', inventory });
+    //4. after creating the inventory item, also create restock history document for the item
+    await session.withTransaction(() => {
+      throw new Error('fake error for simulation');
+    });
+    session.endSession();
+    //4. return the item
+    res.send({});
   } catch (err: any) {
     res.status(400).json({ err });
   }
 };
 
-export { createInventoryController };
+export { createInventoryItemController };

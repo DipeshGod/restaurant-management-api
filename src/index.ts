@@ -6,6 +6,7 @@ import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
 import { inventoryCategoryRouter } from './routes/inventoryCategory';
+import { inventoryItemRouter } from './routes/inventoryItem';
 
 //load environment variables
 dotenv.config();
@@ -36,7 +37,7 @@ app.use('/api/', limiter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/inventory_category', inventoryCategoryRouter);
-// app.use('/api/inventory_item', inventoryRouter);
+app.use('/api/inventory_item', inventoryItemRouter);
 
 const PORT = process.env.PORT || 5000;
 

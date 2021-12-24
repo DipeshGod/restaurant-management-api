@@ -1,13 +1,10 @@
-import {Request,Response} from 'express';
-import { Inventory } from '../../models/Inventory';
+import { Request, Response } from 'express';
 
-const getInventoryController = async(req:Request,res:Response)=>{
-    try{
-        const inventories = await Inventory.find({});
-        res.json({inventories})
-    }catch(err:any  ){
-        res.status(400).json({err})
-    }
-}
+const getInventoryController = async (req: Request, res: Response) => {
+  try {
+  } catch (err: any) {
+    res.status(400).json({ err });
+  }
+};
 
-export {getInventoryController}
+export { getInventoryController };

@@ -1,21 +1,22 @@
 import mongoose from 'mongoose';
 
-export interface IInventory {
+export interface IInventoryItem {
   inventoryCategory: string;
   itemName: string;
   quantity: number;
-  measurementUnit: [string];
+  measurementUnit: string;
   amount: number;
   unitRate: number;
 }
 
-export interface IInventoryDoc extends mongoose.Document {
+export interface IInventoryItemDoc extends mongoose.Document {
   inventoryCategory: string;
   itemName: string;
   quantity: number;
-  measurementUnit: [string];
+  measurementUnit: string;
   amount: number;
   unitRate: number;
 }
 
-export interface IInventoryModel extends mongoose.Model<IInventoryDoc> {}
+export interface IInventoryItemModel
+  extends mongoose.Model<IInventoryItemDoc> {}

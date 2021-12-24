@@ -1,8 +1,10 @@
-import { number } from 'joi';
 import { Schema, model } from 'mongoose';
-import { IInventoryDoc, IInventoryModel } from '../interfaces/models/Inventory';
+import {
+  IInventoryItemDoc,
+  IInventoryItemModel,
+} from '../interfaces/models/InventoryItem';
 
-const inventorySchema = new Schema(
+const inventoryItemSchema = new Schema(
   {
     inventoryCategory: {
       type: Schema.Types.ObjectId,
@@ -18,7 +20,7 @@ const inventorySchema = new Schema(
       required: true,
     },
     measurementUnit: {
-      type: [String],
+      type: String,
       required: true,
     },
     amount: {
@@ -32,9 +34,9 @@ const inventorySchema = new Schema(
   { timestamps: true }
 );
 
-const Inventory = model<IInventoryDoc, IInventoryModel>(
-  'inventory',
-  inventorySchema
+const InventoryItem = model<IInventoryItemDoc, IInventoryItemModel>(
+  'inventoryItem',
+  inventoryItemSchema
 );
 
-export { Inventory };
+export { InventoryItem };
