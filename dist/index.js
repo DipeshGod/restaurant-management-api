@@ -11,6 +11,8 @@ var user_1 = require("./routes/user");
 var mongoose_1 = __importDefault(require("mongoose"));
 var auth_1 = require("./routes/auth");
 var inventoryCategory_1 = require("./routes/inventoryCategory");
+var inventoryItem_1 = require("./routes/inventoryItem");
+var constants_1 = require("./routes/constants");
 //load environment variables
 dotenv_1.default.config();
 //initialize express
@@ -31,10 +33,11 @@ var limiter = (0, express_rate_limit_1.default)({
     max: 1000,
 });
 app.use('/api/', limiter);
+app.use('/api/constants', constants_1.constantsRouter);
 app.use('/api/user', user_1.userRouter);
 app.use('/api/auth', auth_1.authRouter);
 app.use('/api/inventory_category', inventoryCategory_1.inventoryCategoryRouter);
-// app.use('/api/inventory_item', inventoryRouter);
+app.use('/api/inventory_item', inventoryItem_1.inventoryItemRouter);
 var PORT = process.env.PORT || 5000;
 var server;
 //mongdb connection

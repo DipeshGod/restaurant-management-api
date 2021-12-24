@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import { authRouter } from './routes/auth';
 import { inventoryCategoryRouter } from './routes/inventoryCategory';
 import { inventoryItemRouter } from './routes/inventoryItem';
+import { constantsRouter } from './routes/constants';
 
 //load environment variables
 dotenv.config();
@@ -34,6 +35,7 @@ const limiter = rateLimit({
   max: 1000,
 });
 app.use('/api/', limiter);
+app.use('/api/constants', constantsRouter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/inventory_category', inventoryCategoryRouter);

@@ -23,9 +23,6 @@ const inventoryItemSchema = new Schema(
       type: String,
       required: true,
     },
-    amount: {
-      type: Number,
-    },
     unitRate: {
       type: Number,
       required: true,
