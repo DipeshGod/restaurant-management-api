@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ICreateInventoryCategoryRequestBody } from '../../interfaces/requests/InventoryCategory';
 import { InventoryCategory } from '../../models/InventoryCategory';
-import { createInventoryCategoryValidator } from '../../utils/inventoryCategoryValidator';
+import { createInventoryCategoryValidator } from '../../utils/validators/inventoryCategoryValidator';
 
 const createInventoryCategoryController = async (
   req: Request<{}, {}, ICreateInventoryCategoryRequestBody>,

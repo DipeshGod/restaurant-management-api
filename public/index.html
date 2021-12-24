@@ -130,6 +130,42 @@
       </div>
       <!-- inventory category api docs-->
 
+      <!-- inventory category api docs -->
+      <div class="card">
+        <div class="card-header" id="headingFour">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"
+              aria-expanded="true" aria-controls="collapseFour">
+              Inventory Item Management
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseFour" class="collapse hide" aria-labelledby="headingFour" data-parent="#accordionExample">
+          <div class="card-body">
+            <h6>Create New Inventory Item</h6>
+            <h6 class="font-weight-normal">endpoint : /inventory_item</h6>
+            <h6 class="font-weight-normal">method : POST</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
+            <h6 class="font-weight-normal">body: itemName: ( string , required , unique ) , inventoryCategory: (
+              string ,
+              required ) ,
+              quantity: ( number , required ) , unitRate: ( number , required ) , measurementUnit: (string , required)
+            </h6>
+            </h6>
+          </div>
+          <div class="card-body">
+            <h6>Get Inventory Items By Category</h6>
+            <h6 class="font-weight-normal">endpoint : /inventory_item</h6>
+            <h6 class="font-weight-normal">method : GET</h6>
+            <h6 class="font-weight-normal">query : category_id</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
+          </div>
+
+        </div>
+      </div>
+      <!-- inventory category api docs-->
+
 
 
 

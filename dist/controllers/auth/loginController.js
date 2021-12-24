@@ -62,7 +62,7 @@ exports.loginController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
 var jwt = __importStar(require("jsonwebtoken"));
-var authValidator_1 = require("../../utils/authValidator");
+var authValidator_1 = require("../../utils/validators/authValidator");
 //function to validate hash to the user input
 var validatePassword = function (encryptedPassword, checkString) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {

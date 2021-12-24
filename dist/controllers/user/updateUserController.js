@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUserController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
-var userValidator_1 = require("../../utils/userValidator");
+var userValidator_1 = require("../../utils/validators/userValidator");
 var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IUpdateInventoryCategoryRequestBody } from '../../interfaces/requests/InventoryCategory';
-import { updateInventoryCategoryValidator } from '../../utils/inventoryCategoryValidator';
+import { updateInventoryCategoryValidator } from '../../utils/validators/inventoryCategoryValidator';
 import { InventoryCategory } from '../../models/InventoryCategory';
 
 const updateInventoryCategoryController = async (

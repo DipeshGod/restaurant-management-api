@@ -39,55 +39,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUserController = void 0;
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var User_1 = require("../../models/User");
-var userValidator_1 = require("../../utils/validators/userValidator");
-var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
+exports.loginValidator = void 0;
+var joi_1 = __importDefault(require("joi"));
+var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var loginSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, bcryptjs_1.default.hash(password, 10)];
+            case 0:
+                loginSchema = joi_1.default.object({
+                    name: joi_1.default.string().required(),
+                    password: joi_1.default.string().required(),
+                });
+                return [4 /*yield*/, loginSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-var createUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, encryptedPassword, newUser, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 5, , 6]);
-                //validate the request data
-                return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
-            case 1:
-                //validate the request data
-                _a.sent();
-                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
-            case 2:
-                user = _a.sent();
-                if (user) {
-                    return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
-                }
-                return [4 /*yield*/, encryptPassword(req.body.password)];
-            case 3:
-                encryptedPassword = _a.sent();
-                newUser = new User_1.User({
-                    name: req.body.name,
-                    password: encryptedPassword,
-                    role: req.body.role,
-                    salary: req.body.salary | 0,
-                });
-                return [4 /*yield*/, newUser.save()];
-            case 4:
-                _a.sent();
-                res.json({ msg: 'User created successfully', user: newUser });
-                return [3 /*break*/, 6];
-            case 5:
-                err_1 = _a.sent();
-                res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
-        }
-    });
-}); };
-exports.createUserController = createUserController;
+exports.loginValidator = loginValidator;

@@ -42,14 +42,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createInventoryItemController = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
 var InventoryItem_1 = require("../../models/InventoryItem");
+var RestockHistory_1 = require("../../models/RestockHistory");
+var inventoryItemValidator_1 = require("../../utils/validators/inventoryItemValidator");
 var createInventoryItemController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var item, session, err_1;
+    var item, session, newItem_1, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, InventoryItem_1.InventoryItem.findOne({ itemName: req.body.itemName })];
+                _a.trys.push([0, 6, , 7]);
+                //1. validate request body
+                return [4 /*yield*/, (0, inventoryItemValidator_1.createInventoryItemValidator)(req.body)];
             case 1:
+                //1. validate request body
+                _a.sent();
+                return [4 /*yield*/, InventoryItem_1.InventoryItem.findOne({ itemName: req.body.itemName })];
+            case 2:
                 item = _a.sent();
                 if (item) {
                     return [2 /*return*/, res.status(400).json({
@@ -57,31 +64,46 @@ var createInventoryItemController = function (req, res) { return __awaiter(void 
                         })];
                 }
                 return [4 /*yield*/, mongoose_1.default.startSession()];
-            case 2:
-                session = _a.sent();
-                //3. if the item name does not exist, create the item
-                return [4 /*yield*/, session.withTransaction(function () {
-                        return InventoryItem_1.InventoryItem.create(req.body);
-                    })];
             case 3:
-                //3. if the item name does not exist, create the item
+                session = _a.sent();
+                return [4 /*yield*/, session.withTransaction(function () { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, InventoryItem_1.InventoryItem.create(req.body)];
+                                case 1:
+                                    newItem_1 = _a.sent();
+                                    return [2 /*return*/, newItem_1];
+                            }
+                        });
+                    }); })];
+            case 4:
                 _a.sent();
                 //4. after creating the inventory item, also create restock history document for the item
-                return [4 /*yield*/, session.withTransaction(function () {
-                        throw new Error('fake error for simulation');
-                    })];
-            case 4:
+                return [4 /*yield*/, session.withTransaction(function () { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, RestockHistory_1.RestockHistory.create({
+                                        inventoryItem: newItem_1._id,
+                                        inventoryCategory: newItem_1.inventoryCategory,
+                                        quantity: newItem_1.quantity,
+                                        unitRate: newItem_1.unitRate,
+                                    })];
+                                case 1: return [2 /*return*/, _a.sent()];
+                            }
+                        });
+                    }); })];
+            case 5:
                 //4. after creating the inventory item, also create restock history document for the item
                 _a.sent();
                 session.endSession();
                 //4. return the item
-                res.send({});
-                return [3 /*break*/, 6];
-            case 5:
+                res.send({ item: newItem_1 });
+                return [3 /*break*/, 7];
+            case 6:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };

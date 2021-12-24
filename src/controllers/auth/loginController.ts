@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { ILoginRequestBody } from '../../interfaces/requests/Auth';
 import { User } from '../../models/User';
 import * as jwt from 'jsonwebtoken';
-import { loginValidator } from '../../utils/authValidator';
+import { loginValidator } from '../../utils/validators/authValidator';
 
 //function to validate hash to the user input
 const validatePassword = async (

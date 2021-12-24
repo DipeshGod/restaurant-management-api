@@ -36,15 +36,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getInventoryByCategoryController = void 0;
-var getInventoryByCategoryController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.getInventoryItemByCategoryController = void 0;
+var InventoryItem_1 = require("../../models/InventoryItem");
+var getInventoryItemByCategoryController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var inventory, err_1;
     return __generator(this, function (_a) {
-        try {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                if (!req.query.category_id) {
+                    return [2 /*return*/, res.status(400).json({ msg: 'query category_id is required' })];
+                }
+                return [4 /*yield*/, InventoryItem_1.InventoryItem.find({
+                        inventoryCategory: req.query.category_id,
+                    })];
+            case 1:
+                inventory = _a.sent();
+                res.send({ inventory: inventory });
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                res.status(400).json({ err: err_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
-        catch (err) {
-            res.status(400).json({ err: err });
-        }
-        return [2 /*return*/];
     });
 }); };
-exports.getInventoryByCategoryController = getInventoryByCategoryController;
+exports.getInventoryItemByCategoryController = getInventoryItemByCategoryController;

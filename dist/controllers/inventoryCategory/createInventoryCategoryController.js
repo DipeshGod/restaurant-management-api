@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createInventoryCategoryController = void 0;
 var InventoryCategory_1 = require("../../models/InventoryCategory");
-var inventoryCategoryValidator_1 = require("../../utils/inventoryCategoryValidator");
+var inventoryCategoryValidator_1 = require("../../utils/validators/inventoryCategoryValidator");
 var createInventoryCategoryController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var inventoryCategory, err_1;
     return __generator(this, function (_a) {
