@@ -19,8 +19,6 @@ const updateUserController = async (
     //check if user is already on the database
     let user = await User.findById(req.body.id);
 
-    console.log(user);
-
     if (!user) {
       res.status(400).json({ msg: 'user doesnt exist' });
     }
@@ -38,6 +36,7 @@ const updateUserController = async (
         encryptedPassword.length > 0 ? encryptedPassword : user?.password;
       user.role = req.body?.role || user.role;
       user.salary = req.body?.salary || 0;
+      await user.save();
     }
 
     res.json({ msg: 'User updated successfully', user });
