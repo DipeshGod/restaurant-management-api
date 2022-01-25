@@ -11,6 +11,14 @@ import { inventoryItemRouter } from './routes/inventoryItem';
 import { constantsRouter } from './routes/constants';
 import { adminRouter } from './routes/admin';
 
+declare global {
+  namespace Express {
+    interface Request {
+      user: any;
+    }
+  }
+}
+
 //load environment variables
 dotenv.config();
 

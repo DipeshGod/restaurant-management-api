@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ICreateInventoryCategoryRequestBody } from '../../interfaces/requests/InventoryCategory';
 import { InventoryCategory } from '../../models/InventoryCategory';
+import { User } from '../../models/User';
 import { createInventoryCategoryValidator } from '../../utils/validators/inventoryCategoryValidator';
 
 const createInventoryCategoryController = async (
@@ -11,8 +12,14 @@ const createInventoryCategoryController = async (
     //validate request data
     await createInventoryCategoryValidator(req.body);
 
-    //create new inventory category
+    //find restaurant objectId from user to associate inventoryCategory with restaurant
+    const id = req.user._id;
+    const user = await User.findById(id).populate('restaurant');
+    const restroObjectId = user.restaurant._id;
+
+    //create new inventoryCategory
     const inventoryCategory = new InventoryCategory({
+      restaurant: restroObjectId,
       name: req.body.name,
     });
     await inventoryCategory.save();

@@ -1,14 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-declare global {
-  namespace Express {
-    interface Request {
-      user: any;
-    }
-  }
-}
-
 //middleware to authenticate token
 const authentication = async (
   req: Request,
