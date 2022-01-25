@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -58,60 +39,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginController = void 0;
+exports.createRestaurantOwnerController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
-var jwt = __importStar(require("jsonwebtoken"));
-var authValidator_1 = require("../../utils/validators/authValidator");
-//function to validate hash to the user input
-var validatePassword = function (encryptedPassword, checkString) { return __awaiter(void 0, void 0, void 0, function () {
+var userValidator_1 = require("../../utils/validators/userValidator");
+var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, bcryptjs_1.default.compare(checkString, encryptedPassword)];
+            case 0: return [4 /*yield*/, bcryptjs_1.default.hash(password, 10)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-//function to assign token to the user on successful login
-var assignToken = function (user) {
-    var token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    return token;
-};
-var loginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, isValidPassword, token, err_1;
+var createRestaurantOwnerController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, encryptedPassword, newUser, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _a.trys.push([0, 5, , 6]);
                 //validate the request data
-                return [4 /*yield*/, (0, authValidator_1.loginValidator)(req.body)];
+                return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();
-                return [4 /*yield*/, User_1.User.findOne({
-                        name: req.body.name,
-                        restaurant: req.body.restaurant,
-                    }).populate('restaurant')];
+                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
             case 2:
                 user = _a.sent();
-                if (!user) {
-                    return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
+                if (user) {
+                    return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
                 }
-                return [4 /*yield*/, validatePassword(user.password, req.body.password)];
+                return [4 /*yield*/, encryptPassword(req.body.password)];
             case 3:
-                isValidPassword = _a.sent();
-                if (isValidPassword === false) {
-                    return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
-                }
-                token = assignToken(user);
-                res.json({ msg: 'login successfull', token: token, user: user });
-                return [3 /*break*/, 5];
+                encryptedPassword = _a.sent();
+                newUser = new User_1.User({
+                    restaurant: req.body.restaurant,
+                    name: req.body.name,
+                    password: encryptedPassword,
+                    role: ['owner'],
+                });
+                return [4 /*yield*/, newUser.save()];
             case 4:
+                _a.sent();
+                res.status(201).json({ msg: 'User created successfully', user: newUser });
+                return [3 /*break*/, 6];
+            case 5:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };
-exports.loginController = loginController;
+exports.createRestaurantOwnerController = createRestaurantOwnerController;

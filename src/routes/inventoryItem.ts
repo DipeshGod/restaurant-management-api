@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createInventoryItemController } from '../controllers/inventoryItem/createInventoryControler';
-import { getInventoryItemByCategoryController } from '../controllers/inventoryItem/getInventoryByCategoryController';
+import { createInventoryItemController } from '../controllers/inventoryItem/createInventoryItemControler';
+import { getInventoryItemByCategoryController } from '../controllers/inventoryItem/getInventoryItemByCategoryController';
 import { authentication } from '../middlewares/authenticate';
 import { isInventoryManager } from '../middlewares/authorization';
 

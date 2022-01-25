@@ -6,9 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
 var userSchema = new mongoose_1.default.Schema({
+    restaurant: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: 'restaurant',
+        required: true,
+    },
     role: {
         type: [String],
         enum: [
+            'appAdmin',
             'owner',
             'inventoryManager',
             'vendors',

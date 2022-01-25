@@ -10,6 +10,7 @@ var inventoryItemSchema = new mongoose_1.Schema({
     },
     itemName: {
         type: String,
+        unique: true,
         required: true,
     },
     quantity: {

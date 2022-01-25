@@ -35,25 +35,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginValidator = void 0;
-var joi_1 = __importDefault(require("joi"));
-var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var loginSchema;
+exports.getAllRestaurantController = void 0;
+var Restaurant_1 = require("../../models/Restaurant");
+var getAllRestaurantController = function (_, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var restaurants, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                loginSchema = joi_1.default.object({
-                    restaurant: joi_1.default.string().required(),
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
-                });
-                return [4 /*yield*/, loginSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, Restaurant_1.Restaurant.find({})];
+            case 1:
+                restaurants = _a.sent();
+                if (!restaurants) {
+                    res.status(200).json({
+                        message: 'Hope we dont see this msg 6 months from now 1/25/2022',
+                    });
+                }
+                return [2 /*return*/, res.status(200).json({ restaurants: restaurants })];
+            case 2:
+                err_1 = _a.sent();
+                res.status(400).json({ err: err_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.loginValidator = loginValidator;
+exports.getAllRestaurantController = getAllRestaurantController;

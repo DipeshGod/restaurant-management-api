@@ -35,25 +35,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginValidator = void 0;
-var joi_1 = __importDefault(require("joi"));
-var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var loginSchema;
+exports.createRestaurantController = void 0;
+var Restaurant_1 = require("../../models/Restaurant");
+var restaurantValidator_1 = require("../../utils/validators/restaurantValidator");
+var createRestaurantController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var newRestaurant, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                loginSchema = joi_1.default.object({
-                    restaurant: joi_1.default.string().required(),
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
+                _a.trys.push([0, 3, , 4]);
+                //1.validate the request data
+                return [4 /*yield*/, (0, restaurantValidator_1.createRestaurantValidator)(req.body)];
+            case 1:
+                //1.validate the request data
+                _a.sent();
+                newRestaurant = new Restaurant_1.Restaurant({
+                    name: req.body.name,
+                    address: req.body.address,
+                    location: {
+                        type: 'Point',
+                        coordinates: [req.body.longitude, req.body.latitude],
+                    },
+                    features: req.body.features,
+                    contactNumber: req.body.contactNumber,
                 });
-                return [4 /*yield*/, loginSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
+                return [4 /*yield*/, newRestaurant.save()];
+            case 2:
+                _a.sent();
+                return [2 /*return*/, res.status(201).json({
+                        msg: 'Restaurant created successfully',
+                        restaurant: newRestaurant,
+                    })];
+            case 3:
+                err_1 = _a.sent();
+                res.status(400).json({ err: err_1 });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
-exports.loginValidator = loginValidator;
+exports.createRestaurantController = createRestaurantController;

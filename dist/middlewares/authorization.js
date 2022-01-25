@@ -36,8 +36,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isInventoryManager = exports.isOwner = void 0;
+exports.isAppAdmin = exports.isInventoryManager = exports.isOwner = void 0;
 var User_1 = require("../models/User");
+var isAppAdmin = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.user._id;
+                return [4 /*yield*/, User_1.User.findById(id)];
+            case 1:
+                user = _a.sent();
+                if (user === null || user === void 0 ? void 0 : user.role.includes('appAdmin')) {
+                    next();
+                }
+                else {
+                    return [2 /*return*/, res.status(401).json({
+                            msg: 'Your are not owner authorize to access this page',
+                        })];
+                }
+                return [2 /*return*/];
+        }
+    });
+}); };
+exports.isAppAdmin = isAppAdmin;
 var isOwner = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var id, user;
     return __generator(this, function (_a) {

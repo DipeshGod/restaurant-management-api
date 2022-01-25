@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inventoryItemRouter = void 0;
 var express_1 = require("express");
-var createInventoryControler_1 = require("../controllers/inventoryItem/createInventoryControler");
-var getInventoryByCategoryController_1 = require("../controllers/inventoryItem/getInventoryByCategoryController");
+var createInventoryItemControler_1 = require("../controllers/inventoryItem/createInventoryItemControler");
+var getInventoryItemByCategoryController_1 = require("../controllers/inventoryItem/getInventoryItemByCategoryController");
 var authenticate_1 = require("../middlewares/authenticate");
 var authorization_1 = require("../middlewares/authorization");
 var router = (0, express_1.Router)();
 exports.inventoryItemRouter = router;
-router.post('/', [authenticate_1.authentication, authorization_1.isInventoryManager], createInventoryControler_1.createInventoryItemController);
-router.get('/', [authenticate_1.authentication, authorization_1.isInventoryManager], getInventoryByCategoryController_1.getInventoryItemByCategoryController);
+router.post('/', [authenticate_1.authentication, authorization_1.isInventoryManager], createInventoryItemControler_1.createInventoryItemController);
+router.get('/', [authenticate_1.authentication, authorization_1.isInventoryManager], getInventoryItemByCategoryController_1.getInventoryItemByCategoryController);

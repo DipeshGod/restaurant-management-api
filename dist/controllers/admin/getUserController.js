@@ -35,25 +35,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginValidator = void 0;
-var joi_1 = __importDefault(require("joi"));
-var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var loginSchema;
+exports.getUserController = void 0;
+var User_1 = require("../../models/User");
+var getUserController = function (_, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                loginSchema = joi_1.default.object({
-                    restaurant: joi_1.default.string().required(),
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
-                });
-                return [4 /*yield*/, loginSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, User_1.User.find({})];
+            case 1:
+                users = _a.sent();
+                res.json({ users: users });
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                console.log('Error in getUserController: ', err_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.loginValidator = loginValidator;
+exports.getUserController = getUserController;

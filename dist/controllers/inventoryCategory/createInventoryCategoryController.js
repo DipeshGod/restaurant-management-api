@@ -56,7 +56,7 @@ var createInventoryCategoryController = function (req, res) { return __awaiter(v
                 return [4 /*yield*/, inventoryCategory.save()];
             case 2:
                 _a.sent();
-                res.json({
+                res.status(201).json({
                     msg: 'Inventory category created successfully',
                     inventoryCategory: inventoryCategory,
                 });

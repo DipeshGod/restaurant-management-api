@@ -72,6 +72,7 @@ var createUserController = function (req, res) { return __awaiter(void 0, void 0
             case 3:
                 encryptedPassword = _a.sent();
                 newUser = new User_1.User({
+                    restaurant: req.body.restaurant,
                     name: req.body.name,
                     password: encryptedPassword,
                     role: req.body.role,
@@ -80,7 +81,7 @@ var createUserController = function (req, res) { return __awaiter(void 0, void 0
                 return [4 /*yield*/, newUser.save()];
             case 4:
                 _a.sent();
-                res.json({ msg: 'User created successfully', user: newUser });
+                res.status(201).json({ msg: 'User created successfully', user: newUser });
                 return [3 /*break*/, 6];
             case 5:
                 err_1 = _a.sent();

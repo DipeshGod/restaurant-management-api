@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminRouter = void 0;
+var express_1 = require("express");
+var createRestaurantController_1 = require("../controllers/admin/createRestaurantController");
+var createRestaurantOwnerController_1 = require("../controllers/admin/createRestaurantOwnerController");
+var authenticate_1 = require("../middlewares/authenticate");
+var authorization_1 = require("../middlewares/authorization");
+var router = (0, express_1.Router)();
+exports.adminRouter = router;
+router.post('/restaurant', [authenticate_1.authentication, authorization_1.isAppAdmin], createRestaurantController_1.createRestaurantController);
+router.post('/restaurantOwner', [authenticate_1.authentication, authorization_1.isAppAdmin], createRestaurantOwnerController_1.createRestaurantOwnerController);

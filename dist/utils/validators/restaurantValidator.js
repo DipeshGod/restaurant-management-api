@@ -39,21 +39,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginValidator = void 0;
+exports.createRestaurantValidator = void 0;
 var joi_1 = __importDefault(require("joi"));
-var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var loginSchema;
+var createRestaurantValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var createRestaurantSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                loginSchema = joi_1.default.object({
-                    restaurant: joi_1.default.string().required(),
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
+                createRestaurantSchema = joi_1.default.object({
+                    name: joi_1.default.string().required().min(10).max(50),
+                    address: joi_1.default.string().required().min(10).max(50),
+                    longitude: joi_1.default.number().required(),
+                    latitude: joi_1.default.number().required(),
+                    features: joi_1.default.array().items(joi_1.default.string()).required(),
+                    contactNumber: joi_1.default.string().required().min(10).max(10),
                 });
-                return [4 /*yield*/, loginSchema.validateAsync(data)];
+                return [4 /*yield*/, createRestaurantSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-exports.loginValidator = loginValidator;
+exports.createRestaurantValidator = createRestaurantValidator;
