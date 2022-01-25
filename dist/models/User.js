@@ -28,7 +28,6 @@ var userSchema = new mongoose_1.default.Schema({
     },
     name: {
         type: String,
-        unique: true,
         required: true,
     },
     password: {

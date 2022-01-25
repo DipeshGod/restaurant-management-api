@@ -2,14 +2,14 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { User } from '../../models/User';
 import { createUserValidator } from '../../utils/validators/userValidator';
-import { ICreateUserRequestBody } from '../../interfaces/requests/User';
+import { ICreateUserByAdminRequestBody } from '../../interfaces/requests/Admin';
 
 const encryptPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
 };
 
 const createRestaurantOwnerController = async (
-  req: Request<{}, {}, ICreateUserRequestBody>,
+  req: Request<{}, {}, ICreateUserByAdminRequestBody>,
   res: Response
 ) => {
   try {

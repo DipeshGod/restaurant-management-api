@@ -1,5 +1,4 @@
 export interface ICreateUserRequestBody {
-  restaurant: string;
   name: string;
   password: string;
   role: [string];

@@ -16,6 +16,11 @@ const createUserController = async (
     //validate the request data
     await createUserValidator(req.body);
 
+    //get the restaurant objectId from the user
+    const id = req.user._id;
+    const owner = await User.findById(id).populate('restaurant');
+    const restroObjectId = owner.restaurant._id;
+
     //check if user is already on the database
     const user = await User.findOne({ name: req.body.name });
 
@@ -26,7 +31,7 @@ const createUserController = async (
     //if not, create the user
     const encryptedPassword = await encryptPassword(req.body.password);
     const newUser = new User({
-      restaurant: req.body.restaurant,
+      restaurant: restroObjectId,
       name: req.body.name,
       password: encryptedPassword,
       role: req.body.role,

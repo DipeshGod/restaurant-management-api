@@ -52,42 +52,47 @@ var encryptPassword = function (password) { return __awaiter(void 0, void 0, voi
     });
 }); };
 var createUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, encryptedPassword, newUser, err_1;
+    var id, owner, restroObjectId, user, encryptedPassword, newUser, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
+                _a.trys.push([0, 6, , 7]);
                 //validate the request data
                 return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();
-                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+                id = req.user._id;
+                return [4 /*yield*/, User_1.User.findById(id).populate('restaurant')];
             case 2:
+                owner = _a.sent();
+                restroObjectId = owner.restaurant._id;
+                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+            case 3:
                 user = _a.sent();
                 if (user) {
                     return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
                 }
                 return [4 /*yield*/, encryptPassword(req.body.password)];
-            case 3:
+            case 4:
                 encryptedPassword = _a.sent();
                 newUser = new User_1.User({
-                    restaurant: req.body.restaurant,
+                    restaurant: restroObjectId,
                     name: req.body.name,
                     password: encryptedPassword,
                     role: req.body.role,
                     salary: req.body.salary | 0,
                 });
                 return [4 /*yield*/, newUser.save()];
-            case 4:
+            case 5:
                 _a.sent();
                 res.status(201).json({ msg: 'User created successfully', user: newUser });
-                return [3 /*break*/, 6];
-            case 5:
+                return [3 /*break*/, 7];
+            case 6:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };
