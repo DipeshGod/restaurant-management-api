@@ -13,6 +13,7 @@ const inventoryItemSchema = new Schema(
     },
     itemName: {
       type: String,
+      unique: true,
       required: true,
     },
     quantity: {

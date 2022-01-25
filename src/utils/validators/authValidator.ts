@@ -2,6 +2,7 @@ import joi from 'joi';
 
 export const loginValidator = async (data: any) => {
   const loginSchema = joi.object({
+    restaurant: joi.string().required(),
     name: joi.string().required(),
     password: joi.string().required(),
   });

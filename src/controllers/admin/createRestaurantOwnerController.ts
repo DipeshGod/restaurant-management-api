@@ -29,8 +29,7 @@ const createRestaurantOwnerController = async (
       restaurant: req.body.restaurant,
       name: req.body.name,
       password: encryptedPassword,
-      role: req.body.role,
-      salary: req.body.salary | 0,
+      role: ['owner'],
     });
 
     await newUser.save();

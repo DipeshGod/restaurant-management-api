@@ -24,6 +24,29 @@
 
     <div class="accordion" id="accordionExample">
 
+
+      <!-- Restaurant  -->
+      <div class="card">
+        <div class="card-header" id="headingFive">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"
+              aria-expanded="true" aria-controls="collapseFive">
+              Restaurant Endpoints
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordionExample">
+          <div class="card-body">
+            <h6>Get All Restaurant</h6>
+            <h6 class="font-weight-normal">endpoint : /restaurant</h6>
+            <h6 class="font-weight-normal">method : GET</h6>
+            <h6 class="font-weight-normal">permissions : no authentication required</h6>
+          </div>
+        </div>
+      </div>
+      <!-- Restaurant -->
+
       <!-- user api docs -->
       <div class="card">
         <div class="card-header" id="headingOne">
@@ -37,7 +60,7 @@
 
         <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
-            <h6>Constant Values</h6>
+            <h6>User Related Constants</h6>
             <h6 class="font-weight-normal">endpoint : /constants/user</h6>
             <h6 class="font-weight-normal">method : GET</h6>
           </div>
@@ -93,7 +116,8 @@
             <h6 class="font-weight-normal">endpoint : /auth/login</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : ALL</h6>
-            <h6 class="font-weight-normal">body: name ( string , required ), password ( string , required )</h6>
+            <h6 class="font-weight-normal">body: restaurant ( id, string, required ) name ( string , required ),
+              password ( string , required )</h6>
           </div>
         </div>
       </div>
