@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface IUser {
+  restaurant: string;
   role: [string];
   name: string;
   password: string;
@@ -8,6 +9,7 @@ export interface IUser {
 }
 
 export interface IUserDoc extends mongoose.Document {
+  restaurant: string;
   role: [string];
   name: string;
   password: string;

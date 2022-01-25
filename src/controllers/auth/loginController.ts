@@ -27,7 +27,9 @@ const loginController = async (
     //validate the request data
     await loginValidator(req.body);
 
-    const user = await User.findOne({ name: req.body.name });
+    const user = await User.findOne({ name: req.body.name }).populate(
+      'restaurant'
+    );
 
     if (!user) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
