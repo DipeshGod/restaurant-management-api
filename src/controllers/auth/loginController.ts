@@ -44,7 +44,7 @@ const loginController = async (
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
     const token = assignToken(user);
-    res.json({ msg: 'login successfull', token: token });
+    res.json({ msg: 'login successfull', token: token, user });
   } catch (err) {
     res.status(400).json({ err });
   }
