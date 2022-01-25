@@ -13,4 +13,4 @@ exports.userRouter = router;
 router.get('/currentUser', [authenticate_1.authentication], getCurrentUser_1.getCurrentUser);
 router.post('/', [authenticate_1.authentication, authorization_1.isOwner], createUserController_1.createUserController);
 router.put('/', [authenticate_1.authentication, authorization_1.isOwner], updateUserController_1.updateUserController);
-router.get('/:restaurantId', [authenticate_1.authentication, authorization_1.isOwner], getUserByRestaurantIdController_1.getUserByRestaurantIdController);
+router.get('/', [authenticate_1.authentication, authorization_1.isOwner], getUserByRestaurantIdController_1.getUserByRestaurantIdController);

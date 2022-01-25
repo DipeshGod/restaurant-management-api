@@ -11,10 +11,6 @@ const router = Router();
 router.get('/currentUser', [authentication], getCurrentUser);
 router.post('/', [authentication, isOwner], createUserController);
 router.put('/', [authentication, isOwner], updateUserController);
-router.get(
-  '/:restaurantId',
-  [authentication, isOwner],
-  getUserByRestaurantIdController
-);
+router.get('/', [authentication, isOwner], getUserByRestaurantIdController);
 
 export { router as userRouter };

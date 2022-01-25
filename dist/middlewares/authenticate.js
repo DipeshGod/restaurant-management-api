@@ -43,7 +43,7 @@ exports.authentication = void 0;
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 //middleware to authenticate token
 var authentication = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var authHeader, token, isVerfied;
+    var authHeader, token, isVerifiedUser;
     return __generator(this, function (_a) {
         try {
             authHeader = req.headers['authorization'];
@@ -52,9 +52,10 @@ var authentication = function (req, res, next) { return __awaiter(void 0, void 0
                 res.sendStatus(401);
                 return [2 /*return*/];
             }
-            isVerfied = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
-            if (isVerfied) {
-                req.user = isVerfied;
+            isVerifiedUser = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
+            //isVerifiedUser containts userId and restroObjectId or undefined - fails on undefined
+            if (isVerifiedUser) {
+                req.user = isVerifiedUser;
                 next();
             }
         }

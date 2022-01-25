@@ -44,7 +44,9 @@ var getInventoryCategoryController = function (req, res) { return __awaiter(void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, InventoryCategory_1.InventoryCategory.find({})];
+                return [4 /*yield*/, InventoryCategory_1.InventoryCategory.find({
+                        restaurant: req.user.restroObjectId,
+                    })];
             case 1:
                 inventoryCategories = _a.sent();
                 res.json({ inventoryCategories: inventoryCategories });

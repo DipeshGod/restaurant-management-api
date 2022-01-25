@@ -17,9 +17,7 @@ const createUserController = async (
     await createUserValidator(req.body);
 
     //get the restaurant objectId from the user
-    const id = req.user._id;
-    const owner = await User.findById(id).populate('restaurant');
-    const restroObjectId = owner.restaurant._id;
+    const restroObjectId = req.user.restroObjectId;
 
     //check if user is already on the database
     const user = await User.findOne({ name: req.body.name });

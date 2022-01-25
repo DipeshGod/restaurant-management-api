@@ -52,29 +52,25 @@ var encryptPassword = function (password) { return __awaiter(void 0, void 0, voi
     });
 }); };
 var createUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, owner, restroObjectId, user, encryptedPassword, newUser, err_1;
+    var restroObjectId, user, encryptedPassword, newUser, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 6, , 7]);
+                _a.trys.push([0, 5, , 6]);
                 //validate the request data
                 return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id).populate('restaurant')];
-            case 2:
-                owner = _a.sent();
-                restroObjectId = owner.restaurant._id;
+                restroObjectId = req.user.restroObjectId;
                 return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
-            case 3:
+            case 2:
                 user = _a.sent();
                 if (user) {
                     return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
                 }
                 return [4 /*yield*/, encryptPassword(req.body.password)];
-            case 4:
+            case 3:
                 encryptedPassword = _a.sent();
                 newUser = new User_1.User({
                     restaurant: restroObjectId,
@@ -84,15 +80,15 @@ var createUserController = function (req, res) { return __awaiter(void 0, void 0
                     salary: req.body.salary | 0,
                 });
                 return [4 /*yield*/, newUser.save()];
-            case 5:
+            case 4:
                 _a.sent();
                 res.status(201).json({ msg: 'User created successfully', user: newUser });
-                return [3 /*break*/, 7];
-            case 6:
+                return [3 /*break*/, 6];
+            case 5:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 7];
-            case 7: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };

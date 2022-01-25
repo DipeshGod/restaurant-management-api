@@ -16,10 +16,11 @@ const authentication = async (
       return;
     }
 
-    const isVerfied = jwt.verify(token, process.env.TOKEN_SECRET!);
+    const isVerifiedUser = jwt.verify(token, process.env.TOKEN_SECRET!);
 
-    if (isVerfied) {
-      req.user = isVerfied;
+    //isVerifiedUser containts userId and restroObjectId or undefined - fails on undefined
+    if (isVerifiedUser) {
+      req.user = isVerifiedUser;
       next();
     }
   } catch (err) {

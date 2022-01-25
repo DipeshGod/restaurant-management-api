@@ -15,7 +15,10 @@ const validatePassword = async (
 
 //function to assign token to the user on successful login
 const assignToken = (user: any) => {
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET!);
+  const token = jwt.sign(
+    { _id: user._id, restroObjectId: user.restaurant._id },
+    process.env.TOKEN_SECRET!
+  );
   return token;
 };
 

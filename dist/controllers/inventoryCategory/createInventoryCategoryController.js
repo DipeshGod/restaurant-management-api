@@ -38,41 +38,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createInventoryCategoryController = void 0;
 var InventoryCategory_1 = require("../../models/InventoryCategory");
-var User_1 = require("../../models/User");
 var inventoryCategoryValidator_1 = require("../../utils/validators/inventoryCategoryValidator");
 var createInventoryCategoryController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user, restroObjectId, inventoryCategory, err_1;
+    var restroObjectId, inventoryCategory, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _a.trys.push([0, 3, , 4]);
                 //validate request data
                 return [4 /*yield*/, (0, inventoryCategoryValidator_1.createInventoryCategoryValidator)(req.body)];
             case 1:
                 //validate request data
                 _a.sent();
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id).populate('restaurant')];
-            case 2:
-                user = _a.sent();
-                restroObjectId = user.restaurant._id;
+                restroObjectId = req.user.restroObjectId;
                 inventoryCategory = new InventoryCategory_1.InventoryCategory({
                     restaurant: restroObjectId,
                     name: req.body.name,
                 });
                 return [4 /*yield*/, inventoryCategory.save()];
-            case 3:
+            case 2:
                 _a.sent();
                 res.status(201).json({
                     msg: 'Inventory category created successfully',
                     inventoryCategory: inventoryCategory,
                 });
-                return [3 /*break*/, 5];
-            case 4:
+                return [3 /*break*/, 4];
+            case 3:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };

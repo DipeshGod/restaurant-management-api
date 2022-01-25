@@ -13,9 +13,7 @@ const createInventoryCategoryController = async (
     await createInventoryCategoryValidator(req.body);
 
     //find restaurant objectId from user to associate inventoryCategory with restaurant
-    const id = req.user._id;
-    const user = await User.findById(id).populate('restaurant');
-    const restroObjectId = user.restaurant._id;
+    const restroObjectId = req.user.restroObjectId;
 
     //create new inventoryCategory
     const inventoryCategory = new InventoryCategory({
