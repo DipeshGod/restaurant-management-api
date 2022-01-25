@@ -27,7 +27,7 @@ const createInventoryItemController = async (
       newItem = await InventoryItem.create(req.body);
       return newItem;
     });
-    //4. after creating the inventory item, also create restock history document for the item
+    //4. after creating the inventory item, also create restock history document for the item(it is also the first restock)
     await session.withTransaction(async () => {
       return await RestockHistory.create({
         inventoryItem: newItem._id,
@@ -38,7 +38,7 @@ const createInventoryItemController = async (
     });
     session.endSession();
     //4. return the item
-    res.send({ item: newItem });
+    res.status(201).json({ item: newItem });
   } catch (err: any) {
     res.status(400).json({ err });
   }

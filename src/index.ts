@@ -2,8 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
-import { userRouter } from './routes/user';
 import mongoose from 'mongoose';
+import { restaurantRouter } from './routes/restaurant';
+import { userRouter } from './routes/user';
 import { authRouter } from './routes/auth';
 import { inventoryCategoryRouter } from './routes/inventoryCategory';
 import { inventoryItemRouter } from './routes/inventoryItem';
@@ -34,8 +35,10 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 1000,
 });
+
 app.use('/api/', limiter);
 app.use('/api/constants', constantsRouter);
+app.use('/api/restaurant', restaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/inventory_category', inventoryCategoryRouter);

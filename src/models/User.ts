@@ -3,9 +3,15 @@ import { IUserDoc, IUserModel } from '../interfaces/models/User';
 
 const userSchema = new mongoose.Schema(
   {
+    restaurant: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'restaurant',
+      required: true,
+    },
     role: {
       type: [String],
       enum: [
+        'appAdmin',
         'owner',
         'inventoryManager',
         'vendors',

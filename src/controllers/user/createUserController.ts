@@ -26,6 +26,7 @@ const createUserController = async (
     //if not, create the user
     const encryptedPassword = await encryptPassword(req.body.password);
     const newUser = new User({
+      restaurant: req.body.restaurant,
       name: req.body.name,
       password: encryptedPassword,
       role: req.body.role,
@@ -34,7 +35,7 @@ const createUserController = async (
 
     await newUser.save();
 
-    res.json({ msg: 'User created successfully', user: newUser });
+    res.status(201).json({ msg: 'User created successfully', user: newUser });
   } catch (err: any) {
     res.status(400).json({ err });
   }

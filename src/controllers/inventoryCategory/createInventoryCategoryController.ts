@@ -16,7 +16,7 @@ const createInventoryCategoryController = async (
       name: req.body.name,
     });
     await inventoryCategory.save();
-    res.json({
+    res.status(201).json({
       msg: 'Inventory category created successfully',
       inventoryCategory,
     });
