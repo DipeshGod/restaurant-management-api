@@ -4,7 +4,7 @@ import { getCurrentUser } from '../controllers/user/getCurrentUser';
 import { getUserByRestaurantIdController } from '../controllers/user/getUserByRestaurantIdController';
 import { updateUserController } from '../controllers/user/updateUserController';
 import { authentication } from '../middlewares/authenticate';
-import { isOwner, isAppAdmin } from '../middlewares/authorization';
+import { isOwner } from '../middlewares/authorization';
 
 const router = Router();
 
@@ -15,11 +15,6 @@ router.get(
   '/:restaurantId',
   [authentication, isOwner],
   getUserByRestaurantIdController
-);
-router.post(
-  '/restaurantOwner',
-  [authentication, isAppAdmin],
-  createUserController
 );
 
 export { router as userRouter };
