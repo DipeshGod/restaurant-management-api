@@ -30,7 +30,7 @@ const createUserController = async (
     const encryptedPassword = await encryptPassword(req.body.password);
     const newUser = new User({
       restaurant: restroObjectId,
-      name: req.body.name,
+      name: req.body.name.toLowerCase(),
       password: encryptedPassword,
       role: req.body.role,
       salary: req.body.salary | 0,
