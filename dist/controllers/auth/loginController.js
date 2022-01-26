@@ -94,12 +94,14 @@ var loginController = function (req, res) { return __awaiter(void 0, void 0, voi
                     }).populate('restaurant')];
             case 2:
                 user = _a.sent();
+                //if user is not found
                 if (!user) {
                     return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
                 }
                 return [4 /*yield*/, validatePassword(user.password, req.body.password)];
             case 3:
                 isValidPassword = _a.sent();
+                //if password is not valid
                 if (isValidPassword === false) {
                     return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
                 }

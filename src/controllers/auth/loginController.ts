@@ -30,23 +30,28 @@ const loginController = async (
     //validate the request data
     await loginValidator(req.body);
 
+    //find user with the given restaurant and name
     const user = await User.findOne({
       name: req.body.name,
       restaurant: req.body.restaurant,
     }).populate('restaurant');
 
+    //if user is not found
     if (!user) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
 
+    //validate password against hash
     const isValidPassword = await validatePassword(
       user.password,
       req.body.password
     );
-
+    //if password is not valid
     if (isValidPassword === false) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
+
+    //if all successfull return token
     const token = assignToken(user);
     res.json({ msg: 'login successfull', token: token, user });
   } catch (err) {

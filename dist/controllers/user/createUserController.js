@@ -74,7 +74,7 @@ var createUserController = function (req, res) { return __awaiter(void 0, void 0
                 encryptedPassword = _a.sent();
                 newUser = new User_1.User({
                     restaurant: restroObjectId,
-                    name: req.body.name,
+                    name: req.body.name.toLowerCase(),
                     password: encryptedPassword,
                     role: req.body.role,
                     salary: req.body.salary | 0,

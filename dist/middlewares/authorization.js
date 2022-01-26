@@ -52,7 +52,7 @@ var isAppAdmin = function (req, res, next) { return __awaiter(void 0, void 0, vo
                 }
                 else {
                     return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not owner authorize to access this page',
+                            msg: 'Your are not owner authorize to access this api',
                         })];
                 }
                 return [2 /*return*/];
@@ -74,7 +74,7 @@ var isOwner = function (req, res, next) { return __awaiter(void 0, void 0, void 
                 }
                 else {
                     return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not owner authorize to access this page',
+                            msg: 'Your are not owner authorize to access this api',
                         })];
                 }
                 return [2 /*return*/];

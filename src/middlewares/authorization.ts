@@ -10,7 +10,7 @@ const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
     next();
   } else {
     return res.status(401).json({
-      msg: 'Your are not owner authorize to access this page',
+      msg: 'Your are not owner authorize to access this api',
     });
   }
 };
@@ -24,7 +24,7 @@ const isOwner = async (req: Request, res: Response, next: NextFunction) => {
     next();
   } else {
     return res.status(401).json({
-      msg: 'Your are not owner authorize to access this page',
+      msg: 'Your are not owner authorize to access this api',
     });
   }
 };
