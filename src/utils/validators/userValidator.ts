@@ -2,7 +2,6 @@ import joi from 'joi';
 
 export const createUserValidator = async (data: any) => {
   const createUserSchema = joi.object({
-    restaurant: joi.string().required(),
     name: joi.string().required().min(5).max(30),
     password: joi.string().required().min(5).max(30),
     salary: joi.number().optional().min(10000),
