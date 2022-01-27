@@ -43,7 +43,7 @@ var isAppAdmin = function (req, res, next) { return __awaiter(void 0, void 0, vo
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = req.user._id;
+                id = req.user.id;
                 return [4 /*yield*/, User_1.User.findById(id)];
             case 1:
                 user = _a.sent();
@@ -61,46 +61,34 @@ var isAppAdmin = function (req, res, next) { return __awaiter(void 0, void 0, vo
 }); };
 exports.isAppAdmin = isAppAdmin;
 var isOwner = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
+    var role;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id)];
-            case 1:
-                user = _a.sent();
-                if (user === null || user === void 0 ? void 0 : user.role.includes('owner')) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not owner authorize to access this api',
-                        })];
-                }
-                return [2 /*return*/];
+        role = req.user.role;
+        if (role.includes('owner')) {
+            next();
         }
+        else {
+            return [2 /*return*/, res.status(401).json({
+                    msg: 'Your are not owner authorize to access this api',
+                })];
+        }
+        return [2 /*return*/];
     });
 }); };
 exports.isOwner = isOwner;
 var isInventoryManager = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
+    var role;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(id)];
-            case 1:
-                user = _a.sent();
-                if ((user === null || user === void 0 ? void 0 : user.role.includes('inventoryManager')) || (user === null || user === void 0 ? void 0 : user.role.includes('owner'))) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not authorize to access this page',
-                        })];
-                }
-                return [2 /*return*/];
+        role = req.user.role;
+        if (role.includes('inventoryManager') || role.includes('owner')) {
+            next();
         }
+        else {
+            return [2 /*return*/, res.status(401).json({
+                    msg: 'Your are not authorize to access this page',
+                })];
+        }
+        return [2 /*return*/];
     });
 }); };
 exports.isInventoryManager = isInventoryManager;

@@ -2,7 +2,7 @@ import { NextFunction, Response, Request } from 'express';
 import { User } from '../models/User';
 
 const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
-  const id = req.user._id;
+  const { id } = req.user;
 
   const user = await User.findById(id);
 
@@ -16,11 +16,9 @@ const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const isOwner = async (req: Request, res: Response, next: NextFunction) => {
-  const id = req.user._id;
+  const { role } = req.user;
 
-  const user = await User.findById(id);
-
-  if (user?.role.includes('owner')) {
+  if (role.includes('owner')) {
     next();
   } else {
     return res.status(401).json({
@@ -34,11 +32,9 @@ const isInventoryManager = async (
   res: Response,
   next: NextFunction
 ) => {
-  const id = req.user._id;
+  const { role } = req.user;
 
-  const user = await User.findById(id);
-
-  if (user?.role.includes('inventoryManager') || user?.role.includes('owner')) {
+  if (role.includes('inventoryManager') || role.includes('owner')) {
     next();
   } else {
     return res.status(401).json({

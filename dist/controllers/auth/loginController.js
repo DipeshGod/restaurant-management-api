@@ -74,7 +74,11 @@ var validatePassword = function (encryptedPassword, checkString) { return __awai
 }); };
 //function to assign token to the user on successful login
 var assignToken = function (user) {
-    var token = jwt.sign({ _id: user._id, restroObjectId: user.restaurant._id }, process.env.TOKEN_SECRET);
+    var token = jwt.sign({
+        _id: user._id,
+        restroObjectId: user.restaurant._id,
+        role: user.role,
+    }, process.env.TOKEN_SECRET);
     return token;
 };
 var loginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
