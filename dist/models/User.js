@@ -23,7 +23,7 @@ var userSchema = new mongoose_1.default.Schema({
             'Bar Order Manager',
             'Cashier',
             'Accountant',
-            'Members',
+            'Member',
         ],
     },
     name: {

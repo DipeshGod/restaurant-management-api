@@ -7,5 +7,5 @@ export const roles = [
   'Bar Order Manager',
   'Cashier',
   'Accountant',
-  'Members',
+  'Member',
 ];

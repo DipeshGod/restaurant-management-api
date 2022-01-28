@@ -10,5 +10,5 @@ exports.roles = [
     'Bar Order Manager',
     'Cashier',
     'Accountant',
-    'Members',
+    'Member',
 ];

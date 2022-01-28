@@ -39,7 +39,7 @@ export const createUserValidator = async (data: any) => {
             'Bar Order Manager',
             'Cashier',
             'Accountant',
-            'Members'
+            'Member'
           )
       )
       .required(),
