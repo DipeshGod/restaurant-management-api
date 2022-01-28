@@ -39,20 +39,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAppAdmin = exports.isInventoryManager = exports.isOwner = void 0;
 var User_1 = require("../models/User");
 var isAppAdmin = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, user;
+    var _id, user;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = req.user.id;
-                return [4 /*yield*/, User_1.User.findById(id)];
+                _id = req.user._id;
+                return [4 /*yield*/, User_1.User.findById(_id)];
             case 1:
                 user = _a.sent();
-                if (user === null || user === void 0 ? void 0 : user.role.includes('appAdmin')) {
+                if (user === null || user === void 0 ? void 0 : user.role.includes('App Admin')) {
                     next();
                 }
                 else {
                     return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not owner authorize to access this api',
+                            msg: 'Your are not app admin',
                         })];
                 }
                 return [2 /*return*/];
@@ -64,7 +64,7 @@ var isOwner = function (req, res, next) { return __awaiter(void 0, void 0, void 
     var role;
     return __generator(this, function (_a) {
         role = req.user.role;
-        if (role.includes('owner')) {
+        if (role.includes('Owner')) {
             next();
         }
         else {
@@ -80,7 +80,7 @@ var isInventoryManager = function (req, res, next) { return __awaiter(void 0, vo
     var role;
     return __generator(this, function (_a) {
         role = req.user.role;
-        if (role.includes('inventoryManager') || role.includes('owner')) {
+        if (role.includes('Inventory Manager') || role.includes('Owner')) {
             next();
         }
         else {

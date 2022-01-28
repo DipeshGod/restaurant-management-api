@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createRestaurantOwnerController = void 0;
+exports.addAdminController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
 var userValidator_1 = require("../../utils/validators/userValidator");
@@ -51,14 +51,14 @@ var encryptPassword = function (password) { return __awaiter(void 0, void 0, voi
         }
     });
 }); };
-var createRestaurantOwnerController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var addAdminController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, encryptedPassword, newUser, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 5, , 6]);
                 //validate the request data
-                return [4 /*yield*/, (0, userValidator_1.createRestaurantOwnerValidator)(req.body)];
+                return [4 /*yield*/, (0, userValidator_1.createAdminValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();
@@ -72,15 +72,14 @@ var createRestaurantOwnerController = function (req, res) { return __awaiter(voi
             case 3:
                 encryptedPassword = _a.sent();
                 newUser = new User_1.User({
-                    restaurant: req.body.restaurant,
-                    name: req.body.name,
+                    name: req.body.name.toLowerCase(),
                     password: encryptedPassword,
-                    role: ['Owner'],
+                    role: ['App Admin'],
                 });
                 return [4 /*yield*/, newUser.save()];
             case 4:
                 _a.sent();
-                res.status(201).json({ msg: 'User created successfully', user: newUser });
+                res.status(201).json({ msg: 'User created successfully', admin: newUser });
                 return [3 /*break*/, 6];
             case 5:
                 err_1 = _a.sent();
@@ -90,4 +89,4 @@ var createRestaurantOwnerController = function (req, res) { return __awaiter(voi
         }
     });
 }); };
-exports.createRestaurantOwnerController = createRestaurantOwnerController;
+exports.addAdminController = addAdminController;

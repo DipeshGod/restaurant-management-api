@@ -2,15 +2,15 @@ import { NextFunction, Response, Request } from 'express';
 import { User } from '../models/User';
 
 const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.user;
+  const { _id } = req.user;
 
-  const user = await User.findById(id);
+  const user = await User.findById(_id);
 
-  if (user?.role.includes('appAdmin')) {
+  if (user?.role.includes('App Admin')) {
     next();
   } else {
     return res.status(401).json({
-      msg: 'Your are not owner authorize to access this api',
+      msg: 'Your are not app admin',
     });
   }
 };
@@ -18,7 +18,7 @@ const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
 const isOwner = async (req: Request, res: Response, next: NextFunction) => {
   const { role } = req.user;
 
-  if (role.includes('owner')) {
+  if (role.includes('Owner')) {
     next();
   } else {
     return res.status(401).json({
@@ -34,7 +34,7 @@ const isInventoryManager = async (
 ) => {
   const { role } = req.user;
 
-  if (role.includes('inventoryManager') || role.includes('owner')) {
+  if (role.includes('Inventory Manager') || role.includes('Owner')) {
     next();
   } else {
     return res.status(401).json({

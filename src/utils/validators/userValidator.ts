@@ -1,5 +1,24 @@
 import joi from 'joi';
 
+export const createAdminValidator = async (data: any) => {
+  const createAdminSchema = joi.object().keys({
+    name: joi.string().required(),
+    password: joi.string().required(),
+  });
+
+  return await createAdminSchema.validateAsync(data);
+};
+
+export const createRestaurantOwnerValidator = async (data: any) => {
+  const createRestaurantOwnerSchema = joi.object().keys({
+    restaurant: joi.string().required(),
+    name: joi.string().required(),
+    password: joi.string().required(),
+  });
+
+  return await createRestaurantOwnerSchema.validateAsync(data);
+};
+
 export const createUserValidator = async (data: any) => {
   const createUserSchema = joi.object({
     name: joi.string().required().min(5).max(30),
@@ -11,18 +30,19 @@ export const createUserValidator = async (data: any) => {
         joi
           .string()
           .valid(
-            'appAdmin',
-            'owner',
-            'inventoryManager',
-            'vendors',
-            'waiter',
-            'kitchenOrderManager',
-            'barOrderManager',
-            'cashier',
-            'accountant',
-            'members'
+            'App Admin',
+            'Owner',
+            'Inventory Manager',
+            'Vendors',
+            'Waiter',
+            'Kitchen Order Manager',
+            'Bar Order Manager',
+            'Cashier',
+            'Accountant',
+            'Members'
           )
-      ),
+      )
+      .required(),
   });
 
   return await createUserSchema.validateAsync(data);
@@ -41,15 +61,15 @@ export const updateUserValidator = async (data: any) => {
         joi
           .string()
           .valid(
-            'owner',
-            'inventoryManager',
-            'vendors',
-            'waiter',
-            'kitchenOrderManager',
-            'barOrderManager',
-            'cashier',
-            'accountant',
-            'members'
+            'Owner',
+            'Inventory Manager',
+            'Vendors',
+            'Waiter',
+            'kitchen Order Manager',
+            'Bar Order Manager',
+            'Cashier',
+            'Accountant',
+            'Members'
           )
       ),
   });
