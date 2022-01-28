@@ -13,7 +13,7 @@ const createRestaurantController = async (
 
     //2. create restaurant if data are valid
     const newRestaurant = new Restaurant({
-      name: req.body.name,
+      name: req.body.name.toLowerCase(),
       address: req.body.address,
       location: {
         type: 'Point',

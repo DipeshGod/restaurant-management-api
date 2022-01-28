@@ -51,7 +51,7 @@ var createRestaurantController = function (req, res) { return __awaiter(void 0, 
                 //1.validate the request data
                 _a.sent();
                 newRestaurant = new Restaurant_1.Restaurant({
-                    name: req.body.name,
+                    name: req.body.name.toLowerCase(),
                     address: req.body.address,
                     location: {
                         type: 'Point',
