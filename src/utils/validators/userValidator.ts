@@ -23,7 +23,7 @@ export const createUserValidator = async (data: any) => {
   const createUserSchema = joi.object({
     name: joi.string().required().min(5).max(30),
     password: joi.string().required().min(5).max(30),
-    salary: joi.number().optional().min(10000),
+    salary: joi.number().optional().min(0),
     role: joi
       .array()
       .items(
