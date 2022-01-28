@@ -57,6 +57,10 @@ var createUserController = function (req, res) { return __awaiter(void 0, void 0
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 5, , 6]);
+                //when appOwner tries to create a new vendor with no name, default it to UnIndentified
+                if (req.body.role.includes('Vendor') && req.body.name === '') {
+                    req.body.name = 'Unidentified';
+                }
                 //validate the request data
                 return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
             case 1:

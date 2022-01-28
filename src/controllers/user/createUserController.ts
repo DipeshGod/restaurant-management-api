@@ -13,6 +13,11 @@ const createUserController = async (
   res: Response
 ) => {
   try {
+    //when appOwner tries to create a new vendor with no name, default it to UnIndentified
+    if (req.body.role.includes('Vendor') && req.body.name === '') {
+      req.body.name = 'Unidentified';
+    }
+
     //validate the request data
     await createUserValidator(req.body);
 
