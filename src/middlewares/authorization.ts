@@ -1,12 +1,8 @@
 import { NextFunction, Response, Request } from 'express';
-import { User } from '../models/User';
-
 const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
-  const { _id } = req.user;
+  const { role } = req.user;
 
-  const user = await User.findById(_id);
-
-  if (user?.role.includes('App Admin')) {
+  if (role.includes('App Admin')) {
     next();
   } else {
     return res.status(401).json({

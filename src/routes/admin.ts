@@ -18,7 +18,7 @@ router.post(
   [authentication, isAppAdmin],
   createRestaurantOwnerController
 );
-// router.post('/addAdmin', [authentication], addAdminController);
+router.post('/addAdmin', [authentication, isAppAdmin], addAdminController);
 router.post('/login', adminLoginController);
 
 export { router as adminRouter };

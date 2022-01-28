@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.adminRouter = void 0;
 var express_1 = require("express");
+var addAdmin_1 = require("../controllers/admin/addAdmin");
 var adminLogin_1 = require("../controllers/admin/adminLogin");
 var createRestaurantController_1 = require("../controllers/admin/createRestaurantController");
 var createRestaurantOwnerController_1 = require("../controllers/admin/createRestaurantOwnerController");
@@ -11,5 +12,5 @@ var router = (0, express_1.Router)();
 exports.adminRouter = router;
 router.post('/restaurant', [authenticate_1.authentication, authorization_1.isAppAdmin], createRestaurantController_1.createRestaurantController);
 router.post('/restaurantOwner', [authenticate_1.authentication, authorization_1.isAppAdmin], createRestaurantOwnerController_1.createRestaurantOwnerController);
-// router.post('/addAdmin', [authentication], addAdminController);
+router.post('/addAdmin', [authenticate_1.authentication, authorization_1.isAppAdmin], addAdmin_1.addAdminController);
 router.post('/login', adminLogin_1.adminLoginController);

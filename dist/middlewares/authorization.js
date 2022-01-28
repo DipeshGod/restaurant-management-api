@@ -37,26 +37,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAppAdmin = exports.isInventoryManager = exports.isOwner = void 0;
-var User_1 = require("../models/User");
 var isAppAdmin = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _id, user;
+    var role;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _id = req.user._id;
-                return [4 /*yield*/, User_1.User.findById(_id)];
-            case 1:
-                user = _a.sent();
-                if (user === null || user === void 0 ? void 0 : user.role.includes('App Admin')) {
-                    next();
-                }
-                else {
-                    return [2 /*return*/, res.status(401).json({
-                            msg: 'Your are not app admin',
-                        })];
-                }
-                return [2 /*return*/];
+        role = req.user.role;
+        if (role.includes('App Admin')) {
+            next();
         }
+        else {
+            return [2 /*return*/, res.status(401).json({
+                    msg: 'Your are not app admin',
+                })];
+        }
+        return [2 /*return*/];
     });
 }); };
 exports.isAppAdmin = isAppAdmin;

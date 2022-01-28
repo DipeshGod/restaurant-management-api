@@ -18,6 +18,7 @@ const assignToken = (user: any) => {
   const token = jwt.sign(
     {
       _id: user._id,
+      role: user.role,
     },
     process.env.TOKEN_SECRET!
   );

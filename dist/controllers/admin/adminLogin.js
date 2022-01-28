@@ -76,6 +76,7 @@ var validatePassword = function (encryptedPassword, checkString) { return __awai
 var assignToken = function (user) {
     var token = jwt.sign({
         _id: user._id,
+        role: user.role,
     }, process.env.TOKEN_SECRET);
     return token;
 };
