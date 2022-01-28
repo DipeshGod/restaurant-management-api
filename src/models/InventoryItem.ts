@@ -11,6 +11,11 @@ const inventoryItemSchema = new Schema(
       ref: 'inventoryCategory',
       required: true,
     },
+    vendor: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
     itemName: {
       type: String,
       unique: true,

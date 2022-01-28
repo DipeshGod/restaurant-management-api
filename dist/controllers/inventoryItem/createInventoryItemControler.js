@@ -84,6 +84,7 @@ var createInventoryItemController = function (req, res) { return __awaiter(void 
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, RestockHistory_1.RestockHistory.create({
                                         inventoryItem: newItem_1._id,
+                                        vendor: newItem_1.vendor,
                                         inventoryCategory: newItem_1.inventoryCategory,
                                         quantity: newItem_1.quantity,
                                         unitRate: newItem_1.unitRate,

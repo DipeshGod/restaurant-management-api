@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'restaurant',
-      // required: true,
+      required: true,
     },
     role: {
       type: [String],

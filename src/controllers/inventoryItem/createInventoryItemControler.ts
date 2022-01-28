@@ -31,6 +31,7 @@ const createInventoryItemController = async (
     await session.withTransaction(async () => {
       return await RestockHistory.create({
         inventoryItem: newItem._id,
+        vendor: newItem.vendor,
         inventoryCategory: newItem.inventoryCategory,
         quantity: newItem.quantity,
         unitRate: newItem.unitRate,

@@ -48,6 +48,7 @@ var createInventoryItemValidator = function (data) { return __awaiter(void 0, vo
             case 0:
                 inventoryItemSchema = joi_1.default.object({
                     inventoryCategory: joi_1.default.string().required(),
+                    vendor: joi_1.default.string().required(),
                     itemName: joi_1.default.string().required().min(3).max(40),
                     unitRate: joi_1.default.number().required(),
                     quantity: joi_1.default.number().required(),
@@ -67,6 +68,7 @@ var updateInventoryItemValidator = function (data) { return __awaiter(void 0, vo
                 inventoryItemSchema = joi_1.default.object({
                     id: joi_1.default.string().required(),
                     inventoryCategory: joi_1.default.string().required(),
+                    vendor: joi_1.default.string().required(),
                     itemName: joi_1.default.string().required().min(3).max(40),
                     unitRate: joi_1.default.number().required(),
                     quantity: joi_1.default.number().required(),

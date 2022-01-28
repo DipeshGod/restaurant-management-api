@@ -8,6 +8,11 @@ var inventoryItemSchema = new mongoose_1.Schema({
         ref: 'inventoryCategory',
         required: true,
     },
+    vendor: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
     itemName: {
         type: String,
         unique: true,

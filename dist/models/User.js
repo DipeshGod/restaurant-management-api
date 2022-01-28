@@ -9,7 +9,7 @@ var userSchema = new mongoose_1.default.Schema({
     restaurant: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: 'restaurant',
-        // required: true,
+        required: true,
     },
     role: {
         type: [String],
