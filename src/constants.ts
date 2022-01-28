@@ -1,7 +1,7 @@
 export const roles = [
   'Owner',
   'Inventory Manager',
-  'Vendors',
+  'Vendor',
   'Waiter',
   'kitchen Order Manager',
   'Bar Order Manager',

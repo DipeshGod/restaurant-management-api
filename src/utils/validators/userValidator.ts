@@ -33,7 +33,7 @@ export const createUserValidator = async (data: any) => {
             'App Admin',
             'Owner',
             'Inventory Manager',
-            'Vendors',
+            'Vendor',
             'Waiter',
             'Kitchen Order Manager',
             'Bar Order Manager',
