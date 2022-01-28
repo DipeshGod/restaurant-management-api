@@ -36,6 +36,8 @@ var userSchema = new mongoose_1.default.Schema({
     },
     salary: {
         type: Number,
+        required: true,
+        default: 0,
     },
 }, {
     timestamps: true,

@@ -32,7 +32,7 @@ const adminLoginController = async (
     //validate the request data
     await adminLoginValidator(req.body);
 
-    //find user with the given restaurant and name
+    //find user with the given name and role
     const user = await User.findOne({
       name: req.body.name,
       role: ['App Admin'],
