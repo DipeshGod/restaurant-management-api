@@ -35,68 +35,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUserController = void 0;
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
+exports.deleteUserController = void 0;
 var User_1 = require("../../models/User");
-var userValidator_1 = require("../../utils/validators/userValidator");
-var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, bcryptjs_1.default.hash(password, 10)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-var createUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var restroObjectId, user, encryptedPassword, newUser, err_1;
+var deleteUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, restroObjectId, user, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
-                //when appOwner tries to create a new vendor with no name, default it to UnIndentified
-                if (req.body.role.includes('Vendor') && req.body.name === '') {
-                    req.body.name = 'Unidentified';
+                _a.trys.push([0, 2, , 3]);
+                id = req.params.id;
+                if (!id) {
+                    return [2 /*return*/, res.status(400).json({ msg: 'please provide valid id parameter' })];
                 }
-                //validate the request data
-                return [4 /*yield*/, (0, userValidator_1.createUserValidator)(req.body)];
-            case 1:
-                //validate the request data
-                _a.sent();
                 restroObjectId = req.user.restroObjectId;
-                return [4 /*yield*/, User_1.User.findOne({
-                        name: req.body.name,
+                return [4 /*yield*/, User_1.User.findOneAndDelete({
+                        id: id,
                         restaurant: restroObjectId,
                     })];
-            case 2:
+            case 1:
                 user = _a.sent();
-                if (user) {
-                    return [2 /*return*/, res.status(400).json({ msg: 'User already exists' })];
+                //if no user
+                if (!user) {
+                    return [2 /*return*/, res.status(400).json({ msg: 'User doesnt exists' })];
                 }
-                return [4 /*yield*/, encryptPassword(req.body.password)];
-            case 3:
-                encryptedPassword = _a.sent();
-                newUser = new User_1.User({
-                    restaurant: restroObjectId,
-                    name: req.body.name.toLowerCase(),
-                    password: encryptedPassword,
-                    role: req.body.role,
-                    salary: req.body.salary | 0,
-                });
-                return [4 /*yield*/, newUser.save()];
-            case 4:
-                _a.sent();
-                res.status(201).json({ msg: 'User created successfully', user: newUser });
-                return [3 /*break*/, 6];
-            case 5:
+                res.status(200).json({ msg: 'User deleted successfully' });
+                return [3 /*break*/, 3];
+            case 2:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.createUserController = createUserController;
+exports.deleteUserController = deleteUserController;

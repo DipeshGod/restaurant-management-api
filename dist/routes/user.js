@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRouter = void 0;
 var express_1 = require("express");
 var createUserController_1 = require("../controllers/user/createUserController");
+var deleteUserController_1 = require("../controllers/user/deleteUserController");
 var getCurrentUser_1 = require("../controllers/user/getCurrentUser");
 var getUserByRestaurantIdController_1 = require("../controllers/user/getUserByRestaurantIdController");
 var updateUserController_1 = require("../controllers/user/updateUserController");
@@ -14,3 +15,4 @@ router.get('/currentUser', [authenticate_1.authentication], getCurrentUser_1.get
 router.post('/', [authenticate_1.authentication, authorization_1.isOwner], createUserController_1.createUserController);
 router.put('/', [authenticate_1.authentication, authorization_1.isOwner], updateUserController_1.updateUserController);
 router.get('/', [authenticate_1.authentication, authorization_1.isOwner], getUserByRestaurantIdController_1.getUserByRestaurantIdController);
+router.delete('/:id', [authenticate_1.authentication, authorization_1.isOwner], deleteUserController_1.deleteUserController);

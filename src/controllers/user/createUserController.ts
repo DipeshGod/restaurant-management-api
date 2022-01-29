@@ -25,7 +25,10 @@ const createUserController = async (
     const restroObjectId = req.user.restroObjectId;
 
     //check if user is already on the database
-    const user = await User.findOne({ name: req.body.name });
+    const user = await User.findOne({
+      name: req.body.name,
+      restaurant: restroObjectId,
+    });
 
     if (user) {
       return res.status(400).json({ msg: 'User already exists' });
