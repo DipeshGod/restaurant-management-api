@@ -1,10 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { User } from '../../models/User';
-import {
-  createRestaurantOwnerValidator,
-  createUserValidator,
-} from '../../utils/validators/userValidator';
+import { createRestaurantOwnerValidator } from '../../utils/validators/userValidator';
 import { ICreateUserByAdminRequestBody } from '../../interfaces/requests/Admin';
 
 const encryptPassword = async (password: string) => {
@@ -20,7 +17,10 @@ const createRestaurantOwnerController = async (
     await createRestaurantOwnerValidator(req.body);
 
     //check if user is already on the database
-    const user = await User.findOne({ name: req.body.name });
+    const user = await User.findOne({
+      name: req.body.name,
+      restaurant: req.body.restaurant,
+    });
 
     if (user) {
       return res.status(400).json({ msg: 'User already exists' });
