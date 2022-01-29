@@ -76,7 +76,7 @@ var createRestaurantOwnerController = function (req, res) { return __awaiter(voi
                 encryptedPassword = _a.sent();
                 newUser = new User_1.User({
                     restaurant: req.body.restaurant,
-                    name: req.body.name,
+                    name: req.body.name.toLowerCase(),
                     password: encryptedPassword,
                     role: ['Owner'],
                 });

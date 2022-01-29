@@ -77,7 +77,7 @@ var updateUserController = function (req, res) { return __awaiter(void 0, void 0
                 _d.label = 4;
             case 4:
                 if (!user) return [3 /*break*/, 6];
-                user.name = ((_a = req.body.name) === null || _a === void 0 ? void 0 : _a.toLowerCase()) || (user === null || user === void 0 ? void 0 : user.name);
+                user.name = ((_a = req.body.name) === null || _a === void 0 ? void 0 : _a.toLowerCase()) || (user === null || user === void 0 ? void 0 : user.name.toLowerCase());
                 user.password =
                     encryptedPassword.length > 0 ? encryptedPassword : user === null || user === void 0 ? void 0 : user.password;
                 user.role = ((_b = req.body) === null || _b === void 0 ? void 0 : _b.role) || user.role;
