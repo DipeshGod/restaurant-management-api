@@ -30,7 +30,6 @@ export const createUserValidator = async (data: any) => {
         joi
           .string()
           .valid(
-            'App Admin',
             'Owner',
             'Inventory Manager',
             'Vendor',
