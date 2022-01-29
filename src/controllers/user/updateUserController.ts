@@ -31,7 +31,7 @@ const updateUserController = async (
 
     //update user
     if (user) {
-      user.name = req.body.name?.toLowerCase() || user?.name;
+      user.name = req.body.name?.toLowerCase() || user?.name.toLowerCase();
       user.password =
         encryptedPassword.length > 0 ? encryptedPassword : user?.password;
       user.role = req.body?.role || user.role;

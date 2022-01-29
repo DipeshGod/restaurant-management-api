@@ -30,7 +30,7 @@ const createRestaurantOwnerController = async (
     const encryptedPassword = await encryptPassword(req.body.password);
     const newUser = new User({
       restaurant: req.body.restaurant,
-      name: req.body.name,
+      name: req.body.name.toLowerCase(),
       password: encryptedPassword,
       role: ['Owner'],
     });

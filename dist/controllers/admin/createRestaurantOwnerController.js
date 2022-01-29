@@ -62,7 +62,10 @@ var createRestaurantOwnerController = function (req, res) { return __awaiter(voi
             case 1:
                 //validate the request data
                 _a.sent();
-                return [4 /*yield*/, User_1.User.findOne({ name: req.body.name })];
+                return [4 /*yield*/, User_1.User.findOne({
+                        name: req.body.name,
+                        restaurant: req.body.restaurant,
+                    })];
             case 2:
                 user = _a.sent();
                 if (user) {
