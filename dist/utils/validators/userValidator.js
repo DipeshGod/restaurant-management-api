@@ -85,7 +85,7 @@ var createUserValidator = function (data) { return __awaiter(void 0, void 0, voi
                         .array()
                         .items(joi_1.default
                         .string()
-                        .valid('App Admin', 'Owner', 'Inventory Manager', 'Vendor', 'Waiter', 'Kitchen Order Manager', 'Bar Order Manager', 'Cashier', 'Accountant', 'Member'))
+                        .valid('Owner', 'Inventory Manager', 'Vendor', 'Waiter', 'Kitchen Order Manager', 'Bar Order Manager', 'Cashier', 'Accountant', 'Member'))
                         .required(),
                 });
                 return [4 /*yield*/, createUserSchema.validateAsync(data)];
