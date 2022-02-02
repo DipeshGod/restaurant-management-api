@@ -34,9 +34,8 @@ app.use(express.static('public'));
 // Body parser
 app.use(express.json());
 
-//api docs\
-app.get('/infra', (req, res) => res.render('/infra.html'));
-app.get('/', (req, res) => res.render('/index.html'));
+//api docs
+app.get('/docs', (req, res) => res.render('/docs.html'));
 
 //routes
 //rate limit middleware
