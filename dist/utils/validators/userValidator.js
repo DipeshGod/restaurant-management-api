@@ -39,47 +39,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserValidator = exports.createUserValidator = exports.createRestaurantOwnerValidator = exports.createAdminValidator = void 0;
+exports.updateUserValidator = exports.createUserValidator = void 0;
 var joi_1 = __importDefault(require("joi"));
-var createAdminValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var createAdminSchema;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                createAdminSchema = joi_1.default.object().keys({
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
-                });
-                return [4 /*yield*/, createAdminSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-exports.createAdminValidator = createAdminValidator;
-var createRestaurantOwnerValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var createRestaurantOwnerSchema;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                createRestaurantOwnerSchema = joi_1.default.object().keys({
-                    restaurant: joi_1.default.string().required(),
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
-                });
-                return [4 /*yield*/, createRestaurantOwnerSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-exports.createRestaurantOwnerValidator = createRestaurantOwnerValidator;
 var createUserValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
     var createUserSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 createUserSchema = joi_1.default.object({
-                    name: joi_1.default.string().required().min(5).max(30),
+                    name: joi_1.default.string().required().min(5).max(30).trim(),
                     password: joi_1.default.string().required().min(5).max(30),
+                    mobileNumber: joi_1.default.string().required().min(10).max(13),
                     salary: joi_1.default.number().optional().min(0),
                     role: joi_1.default
                         .array()
@@ -95,23 +65,24 @@ var createUserValidator = function (data) { return __awaiter(void 0, void 0, voi
 }); };
 exports.createUserValidator = createUserValidator;
 var updateUserValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var createUserSchema;
+    var updateUserSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                createUserSchema = joi_1.default.object({
+                updateUserSchema = joi_1.default.object({
                     id: joi_1.default.string().required(),
-                    name: joi_1.default.string().optional().min(5).max(30),
+                    name: joi_1.default.string().optional().min(5).max(30).trim(),
                     password: joi_1.default.string().optional().min(5).max(30),
+                    mobileNumber: joi_1.default.string().optional().min(10).max(13).trim(),
                     salary: joi_1.default.number().optional().min(12000),
                     role: joi_1.default
                         .array()
                         .optional()
                         .items(joi_1.default
                         .string()
-                        .valid('Owner', 'Inventory Manager', 'Vendors', 'Waiter', 'kitchen Order Manager', 'Bar Order Manager', 'Cashier', 'Accountant', 'Members')),
+                        .valid('Owner', 'Inventory Manager', 'Vendors', 'Waiter', 'Kitchen Order Manager', 'Bar Order Manager', 'Cashier', 'Accountant', 'Members')),
                 });
-                return [4 /*yield*/, createUserSchema.validateAsync(data)];
+                return [4 /*yield*/, updateUserSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });

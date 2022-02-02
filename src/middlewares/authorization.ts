@@ -1,7 +1,6 @@
 import { NextFunction, Response, Request } from 'express';
 const isAppAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const { role } = req.user;
-
   if (role.includes('App Admin')) {
     next();
   } else {

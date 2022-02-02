@@ -3,7 +3,7 @@ export const roles = [
   'Inventory Manager',
   'Vendor',
   'Waiter',
-  'kitchen Order Manager',
+  'Kitchen Order Manager',
   'Bar Order Manager',
   'Cashier',
   'Accountant',

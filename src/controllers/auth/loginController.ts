@@ -34,9 +34,9 @@ const loginController = async (
     //validate the request data
     await loginValidator(req.body);
 
-    //find user with the given restaurant and name
+    //find user with the given restaurant and mobile number
     const user = await User.findOne({
-      name: req.body.name,
+      mobileNumber: req.body.mobileNumber,
       restaurant: req.body.restaurant,
     }).populate('restaurant');
 

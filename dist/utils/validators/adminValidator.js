@@ -39,56 +39,53 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addAdminController = void 0;
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var adminValidator_1 = require("../../utils/validators/adminValidator");
-var AppAdmin_1 = require("../../models/AppAdmin");
-var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
+exports.createRestaurantOwnerValidator = exports.appAdminLoginValidator = exports.createAdminValidator = void 0;
+var joi_1 = __importDefault(require("joi"));
+var createAdminValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var createAdminSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, bcryptjs_1.default.hash(password, 10)];
+            case 0:
+                createAdminSchema = joi_1.default.object().keys({
+                    name: joi_1.default.string().required().trim(),
+                    password: joi_1.default.string().required(),
+                    mobileNumber: joi_1.default.string().required().min(10).max(13).trim(),
+                });
+                return [4 /*yield*/, createAdminSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-var addAdminController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var appAdmin, encryptedPassword, newAppAdmin, err_1;
+exports.createAdminValidator = createAdminValidator;
+var appAdminLoginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var loginSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
-                //validate the request data
-                return [4 /*yield*/, (0, adminValidator_1.createAdminValidator)(req.body)];
-            case 1:
-                //validate the request data
-                _a.sent();
-                return [4 /*yield*/, AppAdmin_1.AppAdmin.findOne({ name: req.body.name })];
-            case 2:
-                appAdmin = _a.sent();
-                if (appAdmin) {
-                    return [2 /*return*/, res.status(400).json({ msg: 'App Admin already exists' })];
-                }
-                return [4 /*yield*/, encryptPassword(req.body.password)];
-            case 3:
-                encryptedPassword = _a.sent();
-                newAppAdmin = new AppAdmin_1.AppAdmin({
-                    name: req.body.name.toLowerCase(),
-                    mobileNumber: req.body.mobileNumber,
-                    password: encryptedPassword,
+                loginSchema = joi_1.default.object({
+                    password: joi_1.default.string().required(),
+                    mobileNumber: joi_1.default.string().required().min(10).max(13),
                 });
-                return [4 /*yield*/, newAppAdmin.save()];
-            case 4:
-                _a.sent();
-                res
-                    .status(201)
-                    .json({ msg: 'User created successfully', admin: newAppAdmin });
-                return [3 /*break*/, 6];
-            case 5:
-                err_1 = _a.sent();
-                res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [4 /*yield*/, loginSchema.validateAsync(data)];
+            case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-exports.addAdminController = addAdminController;
+exports.appAdminLoginValidator = appAdminLoginValidator;
+var createRestaurantOwnerValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var createRestaurantOwnerSchema;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                createRestaurantOwnerSchema = joi_1.default.object().keys({
+                    restaurant: joi_1.default.string().required(),
+                    name: joi_1.default.string().required(),
+                    password: joi_1.default.string().required(),
+                    mobileNumber: joi_1.default.string().required().min(10).max(13),
+                });
+                return [4 /*yield*/, createRestaurantOwnerSchema.validateAsync(data)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+exports.createRestaurantOwnerValidator = createRestaurantOwnerValidator;

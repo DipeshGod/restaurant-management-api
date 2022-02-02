@@ -93,7 +93,7 @@ var loginController = function (req, res) { return __awaiter(void 0, void 0, voi
                 //validate the request data
                 _a.sent();
                 return [4 /*yield*/, User_1.User.findOne({
-                        name: req.body.name,
+                        mobileNumber: req.body.mobileNumber,
                         restaurant: req.body.restaurant,
                     }).populate('restaurant')];
             case 2:

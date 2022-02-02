@@ -11,12 +11,11 @@ const userSchema = new mongoose.Schema(
     role: {
       type: [String],
       enum: [
-        'App Admin',
         'Owner',
         'Inventory Manager',
         'Vendor',
         'Waiter',
-        'kitchen Order Manager',
+        'Kitchen Order Manager',
         'Bar Order Manager',
         'Cashier',
         'Accountant',
@@ -26,6 +25,11 @@ const userSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+    },
+    mobileNumber: {
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
       type: String,

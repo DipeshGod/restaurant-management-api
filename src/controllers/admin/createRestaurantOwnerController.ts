@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { User } from '../../models/User';
-import { createRestaurantOwnerValidator } from '../../utils/validators/userValidator';
+import { createRestaurantOwnerValidator } from '../../utils/validators/adminValidator';
 import { ICreateUserByAdminRequestBody } from '../../interfaces/requests/Admin';
 
 const encryptPassword = async (password: string) => {
@@ -18,7 +18,7 @@ const createRestaurantOwnerController = async (
 
     //check if user is already on the database
     const user = await User.findOne({
-      name: req.body.name,
+      mobileNumber: req.body.mobileNumber,
       restaurant: req.body.restaurant,
     });
 
@@ -31,6 +31,7 @@ const createRestaurantOwnerController = async (
     const newUser = new User({
       restaurant: req.body.restaurant,
       name: req.body.name.toLowerCase(),
+      mobileNumber: req.body.mobileNumber,
       password: encryptedPassword,
       role: ['Owner'],
     });

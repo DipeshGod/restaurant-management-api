@@ -8,11 +8,3 @@ export const loginValidator = async (data: any) => {
   });
   return await loginSchema.validateAsync(data);
 };
-
-export const adminLoginValidator = async (data: any) => {
-  const loginSchema = joi.object({
-    name: joi.string().required(),
-    password: joi.string().required(),
-  });
-  return await loginSchema.validateAsync(data);
-};

@@ -1,5 +1,5 @@
 export interface ILoginRequestBody {
   restaurant: string;
-  name: string;
+  mobileNumber: string;
   password: string;
 }

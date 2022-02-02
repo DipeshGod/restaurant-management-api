@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createRestaurantOwnerController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var User_1 = require("../../models/User");
-var userValidator_1 = require("../../utils/validators/userValidator");
+var adminValidator_1 = require("../../utils/validators/adminValidator");
 var encryptPassword = function (password) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -58,12 +58,12 @@ var createRestaurantOwnerController = function (req, res) { return __awaiter(voi
             case 0:
                 _a.trys.push([0, 5, , 6]);
                 //validate the request data
-                return [4 /*yield*/, (0, userValidator_1.createRestaurantOwnerValidator)(req.body)];
+                return [4 /*yield*/, (0, adminValidator_1.createRestaurantOwnerValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();
                 return [4 /*yield*/, User_1.User.findOne({
-                        name: req.body.name,
+                        mobileNumber: req.body.mobileNumber,
                         restaurant: req.body.restaurant,
                     })];
             case 2:
@@ -77,6 +77,7 @@ var createRestaurantOwnerController = function (req, res) { return __awaiter(voi
                 newUser = new User_1.User({
                     restaurant: req.body.restaurant,
                     name: req.body.name.toLowerCase(),
+                    mobileNumber: req.body.mobileNumber,
                     password: encryptedPassword,
                     role: ['Owner'],
                 });

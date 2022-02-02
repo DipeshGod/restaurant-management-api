@@ -69,7 +69,8 @@
             <h6 class="font-weight-normal">endpoint : /user</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : [ 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: name ( string , required ) , password ( string , required ) , role (
+            <h6 class="font-weight-normal">body: name ( string , required ) , mobileNumber: (string , required) password
+              ( string , required ) , role (
               array
               , required ) , salary (number , optional)</h6>
           </div>
@@ -84,7 +85,8 @@
             <h6 class="font-weight-normal">endpoint : /user</h6>
             <h6 class="font-weight-normal">method : PUT</h6>
             <h6 class="font-weight-normal">permissions : [ 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: id ( string , required) name ( string , optional ) , password ( string
+            <h6 class="font-weight-normal">body: id ( string , required ), mobileNumber: ( string , required ) , name (
+              string , optional ) , password ( string
               , optional ) , role (
               array
               , optional ) , salary (number , optional)</h6>
@@ -122,7 +124,7 @@
             <h6 class="font-weight-normal">endpoint : /auth/login</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : ALL</h6>
-            <h6 class="font-weight-normal">body: restaurant ( id, string, required ) name ( string , required ),
+            <h6 class="font-weight-normal">body: restaurant ( id, string, required ) mobileNumber ( string , required ),
               password ( string , required )</h6>
           </div>
         </div>

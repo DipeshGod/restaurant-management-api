@@ -1,28 +1,10 @@
 import joi from 'joi';
 
-export const createAdminValidator = async (data: any) => {
-  const createAdminSchema = joi.object().keys({
-    name: joi.string().required(),
-    password: joi.string().required(),
-  });
-
-  return await createAdminSchema.validateAsync(data);
-};
-
-export const createRestaurantOwnerValidator = async (data: any) => {
-  const createRestaurantOwnerSchema = joi.object().keys({
-    restaurant: joi.string().required(),
-    name: joi.string().required(),
-    password: joi.string().required(),
-  });
-
-  return await createRestaurantOwnerSchema.validateAsync(data);
-};
-
 export const createUserValidator = async (data: any) => {
   const createUserSchema = joi.object({
-    name: joi.string().required().min(5).max(30),
+    name: joi.string().required().min(5).max(30).trim(),
     password: joi.string().required().min(5).max(30),
+    mobileNumber: joi.string().required().min(10).max(13),
     salary: joi.number().optional().min(0),
     role: joi
       .array()
@@ -48,10 +30,11 @@ export const createUserValidator = async (data: any) => {
 };
 
 export const updateUserValidator = async (data: any) => {
-  const createUserSchema = joi.object({
+  const updateUserSchema = joi.object({
     id: joi.string().required(),
-    name: joi.string().optional().min(5).max(30),
+    name: joi.string().optional().min(5).max(30).trim(),
     password: joi.string().optional().min(5).max(30),
+    mobileNumber: joi.string().optional().min(10).max(13).trim(),
     salary: joi.number().optional().min(12000),
     role: joi
       .array()
@@ -64,7 +47,7 @@ export const updateUserValidator = async (data: any) => {
             'Inventory Manager',
             'Vendors',
             'Waiter',
-            'kitchen Order Manager',
+            'Kitchen Order Manager',
             'Bar Order Manager',
             'Cashier',
             'Accountant',
@@ -73,5 +56,5 @@ export const updateUserValidator = async (data: any) => {
       ),
   });
 
-  return await createUserSchema.validateAsync(data);
+  return await updateUserSchema.validateAsync(data);
 };

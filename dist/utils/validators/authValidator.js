@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adminLoginValidator = exports.loginValidator = void 0;
+exports.loginValidator = void 0;
 var joi_1 = __importDefault(require("joi"));
 var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
     var loginSchema;
@@ -57,18 +57,3 @@ var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.loginValidator = loginValidator;
-var adminLoginValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var loginSchema;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                loginSchema = joi_1.default.object({
-                    name: joi_1.default.string().required(),
-                    password: joi_1.default.string().required(),
-                });
-                return [4 /*yield*/, loginSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-exports.adminLoginValidator = adminLoginValidator;

@@ -60,9 +60,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.adminLoginController = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var User_1 = require("../../models/User");
 var jwt = __importStar(require("jsonwebtoken"));
-var authValidator_1 = require("../../utils/validators/authValidator");
+var adminValidator_1 = require("../../utils/validators/adminValidator");
+var AppAdmin_1 = require("../../models/AppAdmin");
 //function to validate hash to the user input
 var validatePassword = function (encryptedPassword, checkString) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
@@ -73,43 +73,42 @@ var validatePassword = function (encryptedPassword, checkString) { return __awai
     });
 }); };
 //function to assign token to the user on successful login
-var assignToken = function (user) {
+var assignToken = function (appAdmin) {
     var token = jwt.sign({
-        _id: user._id,
-        role: user.role,
+        _id: appAdmin._id,
+        role: ['App Admin'],
     }, process.env.TOKEN_SECRET);
     return token;
 };
 var adminLoginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, isValidPassword, token, err_1;
+    var appAdmin, isValidPassword, token, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 4, , 5]);
                 //validate the request data
-                return [4 /*yield*/, (0, authValidator_1.adminLoginValidator)(req.body)];
+                return [4 /*yield*/, (0, adminValidator_1.appAdminLoginValidator)(req.body)];
             case 1:
                 //validate the request data
                 _a.sent();
-                return [4 /*yield*/, User_1.User.findOne({
-                        name: req.body.name,
-                        role: ['App Admin'],
-                    })];
+                return [4 /*yield*/, AppAdmin_1.AppAdmin.findOne({
+                        mobileNumber: req.body.mobileNumber,
+                    }).select('+password')];
             case 2:
-                user = _a.sent();
-                //if user is not found
-                if (!user) {
+                appAdmin = _a.sent();
+                //if app admin is not found
+                if (!appAdmin) {
                     return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
                 }
-                return [4 /*yield*/, validatePassword(user.password, req.body.password)];
+                return [4 /*yield*/, validatePassword(appAdmin.password, req.body.password)];
             case 3:
                 isValidPassword = _a.sent();
                 //if password is not valid
                 if (isValidPassword === false) {
                     return [2 /*return*/, res.status(401).json({ msg: 'Invalid Credentials' })];
                 }
-                token = assignToken(user);
-                res.json({ msg: 'Welcome Admin', token: token, user: user });
+                token = assignToken(appAdmin);
+                res.json({ msg: 'Welcome Admin', token: token, appAdmin: appAdmin });
                 return [3 /*break*/, 5];
             case 4:
                 err_1 = _a.sent();

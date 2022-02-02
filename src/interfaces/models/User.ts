@@ -7,6 +7,7 @@ export interface IUser {
   name: string;
   password: string;
   salary: number;
+  mobileNumber: string;
 }
 
 export interface IUserDoc extends mongoose.Document {
@@ -15,6 +16,7 @@ export interface IUserDoc extends mongoose.Document {
   name: string;
   password: string;
   salary: number;
+  mobileNumber: string;
 }
 
 export interface IUserModel extends mongoose.Model<IUserDoc> {}

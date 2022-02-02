@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { User } from '../../models/User';
 import * as jwt from 'jsonwebtoken';
-import { adminLoginValidator } from '../../utils/validators/authValidator';
+import { appAdminLoginValidator } from '../../utils/validators/adminValidator';
 import { IAdminLoginRequestBody } from '../../interfaces/requests/Admin';
+import { AppAdmin } from '../../models/AppAdmin';
 
 //function to validate hash to the user input
 const validatePassword = async (
@@ -14,11 +14,11 @@ const validatePassword = async (
 };
 
 //function to assign token to the user on successful login
-const assignToken = (user: any) => {
+const assignToken = (appAdmin: any) => {
   const token = jwt.sign(
     {
-      _id: user._id,
-      role: user.role,
+      _id: appAdmin._id,
+      role: ['App Admin'],
     },
     process.env.TOKEN_SECRET!
   );
@@ -31,22 +31,20 @@ const adminLoginController = async (
 ) => {
   try {
     //validate the request data
-    await adminLoginValidator(req.body);
+    await appAdminLoginValidator(req.body);
 
-    //find user with the given name and role
-    const user = await User.findOne({
-      name: req.body.name,
-      role: ['App Admin'],
-    });
-
-    //if user is not found
-    if (!user) {
+    //find app admin with the given mobile number
+    const appAdmin = await AppAdmin.findOne({
+      mobileNumber: req.body.mobileNumber,
+    }).select('+password');
+    //if app admin is not found
+    if (!appAdmin) {
       return res.status(401).json({ msg: 'Invalid Credentials' });
     }
 
     //validate password against hash
     const isValidPassword = await validatePassword(
-      user.password,
+      appAdmin.password,
       req.body.password
     );
     //if password is not valid
@@ -55,8 +53,8 @@ const adminLoginController = async (
     }
 
     //if all successfull return token
-    const token = assignToken(user);
-    res.json({ msg: 'Welcome Admin', token: token, user });
+    const token = assignToken(appAdmin);
+    res.json({ msg: 'Welcome Admin', token: token, appAdmin });
   } catch (err) {
     res.status(400).json({ err });
   }
