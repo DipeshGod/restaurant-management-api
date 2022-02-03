@@ -48,7 +48,6 @@ var loginValidator = function (data) { return __awaiter(void 0, void 0, void 0, 
             case 0:
                 loginSchema = joi_1.default.object({
                     restaurant: joi_1.default.string().required(),
-                    name: joi_1.default.string().required(),
                     password: joi_1.default.string().required(),
                 });
                 return [4 /*yield*/, loginSchema.validateAsync(data)];

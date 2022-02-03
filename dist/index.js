@@ -25,9 +25,8 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.static('public'));
 // Body parser
 app.use(express_1.default.json());
-//api docs\
-app.get('/infra', function (req, res) { return res.render('/infra.html'); });
-app.get('/', function (req, res) { return res.render('/index.html'); });
+//api docs
+app.get('/docs', function (req, res) { return res.render('/docs.html'); });
 //routes
 //rate limit middleware
 var limiter = (0, express_rate_limit_1.default)({
