@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateInventoryItemValidator = exports.createInventoryItemValidator = void 0;
+exports.updateInventoryItemValidator = exports.restockInventoryItemValidator = exports.createInventoryItemValidator = void 0;
 var joi_1 = __importDefault(require("joi"));
 var createInventoryItemValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
     var inventoryItemSchema;
@@ -60,6 +60,22 @@ var createInventoryItemValidator = function (data) { return __awaiter(void 0, vo
     });
 }); };
 exports.createInventoryItemValidator = createInventoryItemValidator;
+var restockInventoryItemValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var restockInventoryItemSchema;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                restockInventoryItemSchema = joi_1.default.object({
+                    id: joi_1.default.string().required(),
+                    quantity: joi_1.default.number().required(),
+                    unitRate: joi_1.default.number().required(),
+                });
+                return [4 /*yield*/, restockInventoryItemSchema.validateAsync(data)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+exports.restockInventoryItemValidator = restockInventoryItemValidator;
 var updateInventoryItemValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
     var inventoryItemSchema;
     return __generator(this, function (_a) {
@@ -67,12 +83,12 @@ var updateInventoryItemValidator = function (data) { return __awaiter(void 0, vo
             case 0:
                 inventoryItemSchema = joi_1.default.object({
                     id: joi_1.default.string().required(),
-                    inventoryCategory: joi_1.default.string().required(),
-                    vendor: joi_1.default.string().required(),
-                    itemName: joi_1.default.string().required().min(3).max(40),
-                    unitRate: joi_1.default.number().required(),
-                    quantity: joi_1.default.number().required(),
-                    measurementUnit: joi_1.default.string().required(),
+                    inventoryCategory: joi_1.default.string(),
+                    vendor: joi_1.default.string(),
+                    itemName: joi_1.default.string().min(3).max(40),
+                    unitRate: joi_1.default.number(),
+                    quantity: joi_1.default.number(),
+                    measurementUnit: joi_1.default.string(),
                 });
                 return [4 /*yield*/, inventoryItemSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];

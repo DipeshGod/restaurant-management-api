@@ -53,19 +53,19 @@ var encryptPassword = function (password) { return __awaiter(void 0, void 0, voi
 }); };
 var updateUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, encryptedPassword, err_1;
-    var _a, _b, _c;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
+    var _a, _b, _c, _d;
+    return __generator(this, function (_e) {
+        switch (_e.label) {
             case 0:
-                _d.trys.push([0, 7, , 8]);
+                _e.trys.push([0, 7, , 8]);
                 //validate the request data
                 return [4 /*yield*/, (0, userValidator_1.updateUserValidator)(req.body)];
             case 1:
                 //validate the request data
-                _d.sent();
+                _e.sent();
                 return [4 /*yield*/, User_1.User.findById(req.body.id)];
             case 2:
-                user = _d.sent();
+                user = _e.sent();
                 if (!user) {
                     res.status(400).json({ msg: 'user doesnt exist' });
                 }
@@ -73,24 +73,25 @@ var updateUserController = function (req, res) { return __awaiter(void 0, void 0
                 if (!req.body.password) return [3 /*break*/, 4];
                 return [4 /*yield*/, encryptPassword(req.body.password)];
             case 3:
-                encryptedPassword = _d.sent();
-                _d.label = 4;
+                encryptedPassword = _e.sent();
+                _e.label = 4;
             case 4:
                 if (!user) return [3 /*break*/, 6];
                 user.name = ((_a = req.body.name) === null || _a === void 0 ? void 0 : _a.toLowerCase()) || (user === null || user === void 0 ? void 0 : user.name.toLowerCase());
+                user.mobileNumber = ((_b = req.body) === null || _b === void 0 ? void 0 : _b.mobileNumber) || user.mobileNumber;
                 user.password =
                     encryptedPassword.length > 0 ? encryptedPassword : user === null || user === void 0 ? void 0 : user.password;
-                user.role = ((_b = req.body) === null || _b === void 0 ? void 0 : _b.role) || user.role;
-                user.salary = ((_c = req.body) === null || _c === void 0 ? void 0 : _c.salary) || 0;
+                user.role = ((_c = req.body) === null || _c === void 0 ? void 0 : _c.role) || user.role;
+                user.salary = ((_d = req.body) === null || _d === void 0 ? void 0 : _d.salary) || 0;
                 return [4 /*yield*/, user.save()];
             case 5:
-                _d.sent();
-                _d.label = 6;
+                _e.sent();
+                _e.label = 6;
             case 6:
                 res.json({ msg: 'User updated successfully', user: user });
                 return [3 /*break*/, 8];
             case 7:
-                err_1 = _d.sent();
+                err_1 = _e.sent();
                 res.status(400).json({ err: err_1 });
                 return [3 /*break*/, 8];
             case 8: return [2 /*return*/];
