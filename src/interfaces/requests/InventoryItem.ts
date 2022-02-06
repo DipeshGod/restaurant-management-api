@@ -6,6 +6,12 @@ export interface ICreateInventoryItemRequestBody {
   unitRate: number;
 }
 
+export interface IRestockInventoryItemRequestBody {
+  id: string;
+  quantity: number;
+  unitRate: number;
+}
+
 export interface IUpdateInventoryItemRequestBody {
   id: string;
   inventoryCategory?: string;

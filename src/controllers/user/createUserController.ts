@@ -26,7 +26,7 @@ const createUserController = async (
 
     //check if user is already on the database
     const user = await User.findOne({
-      name: req.body.name,
+      mobileNumber: req.body.mobileNumber,
       restaurant: restroObjectId,
     });
 
@@ -38,6 +38,7 @@ const createUserController = async (
     const encryptedPassword = await encryptPassword(req.body.password);
     const newUser = new User({
       restaurant: restroObjectId,
+      mobileNumber: req.body.mobileNumber,
       name: req.body.name.toLowerCase(),
       password: encryptedPassword,
       role: req.body.role,

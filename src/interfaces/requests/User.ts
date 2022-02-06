@@ -3,6 +3,7 @@ export interface ICreateUserRequestBody {
   password: string;
   role: [string];
   salary: number;
+  mobileNumber: string;
 }
 
 export interface IUpdateUserRequestBody {
@@ -11,4 +12,5 @@ export interface IUpdateUserRequestBody {
   password?: string;
   role?: [string];
   salary?: number;
+  mobileNumber?: string;
 }
