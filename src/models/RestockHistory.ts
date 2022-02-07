@@ -7,14 +7,18 @@ import {
 
 const restockHistorySchema = new Schema(
   {
-    inventoryCategory: {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: 'inventoryCategory',
+      ref: 'user',
       required: true,
     },
     inventoryItem: {
       type: [Schema.Types.ObjectId],
       ref: 'inventoryItem',
+      required: true,
+    },
+    paidTotal: {
+      type: Boolean,
       required: true,
     },
     vendor: {
@@ -29,6 +33,11 @@ const restockHistorySchema = new Schema(
     cashPaid: {
       type: Number,
       required: true,
+    },
+    billImage: {
+      type: String,
+      required: false,
+      default: '',
     },
   },
   { timestamps: true }

@@ -69,6 +69,8 @@ var restockInventoryItemValidator = function (data) { return __awaiter(void 0, v
                     cashPaid: joi_1.default.number().required(),
                     cashRemaining: joi_1.default.number().required(),
                     vendor: joi_1.default.string().required(),
+                    paidTotal: joi_1.default.boolean().required(),
+                    billImage: joi_1.default.string().optional(),
                 });
                 return [4 /*yield*/, restockInventoryItemSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];

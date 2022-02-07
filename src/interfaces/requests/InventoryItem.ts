@@ -5,16 +5,10 @@ export interface ICreateInventoryItemRequestBody {
 }
 
 export interface IRestockInventoryItemRequestBody {
-  id: string;
-  quantity: number;
-  unitRate: number;
-}
-
-export interface IUpdateInventoryItemRequestBody {
-  id: string;
-  inventoryCategory?: string;
-  itemName?: string;
-  quantity?: number;
-  measurementUnit?: string;
-  unitRate?: number;
+  inventoryItem: [string];
+  vendor: string;
+  cashRemaining: number;
+  cashPaid: number;
+  paidTotal: boolean;
+  billImage: string;
 }

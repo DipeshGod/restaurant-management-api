@@ -17,6 +17,8 @@ export const restockInventoryItemValidator = async (data: any) => {
     cashPaid: joi.number().required(),
     cashRemaining: joi.number().required(),
     vendor: joi.string().required(),
+    paidTotal: joi.boolean().required(),
+    billImage: joi.string().optional(),
   });
   return await restockInventoryItemSchema.validateAsync(data);
 };

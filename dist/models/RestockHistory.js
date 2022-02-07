@@ -3,14 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RestockHistory = void 0;
 var mongoose_1 = require("mongoose");
 var restockHistorySchema = new mongoose_1.Schema({
-    inventoryCategory: {
+    user: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'inventoryCategory',
+        ref: 'user',
         required: true,
     },
     inventoryItem: {
         type: [mongoose_1.Schema.Types.ObjectId],
         ref: 'inventoryItem',
+        required: true,
+    },
+    paidTotal: {
+        type: Boolean,
         required: true,
     },
     vendor: {
@@ -25,6 +29,11 @@ var restockHistorySchema = new mongoose_1.Schema({
     cashPaid: {
         type: Number,
         required: true,
+    },
+    billImage: {
+        type: String,
+        required: false,
+        default: '',
     },
 }, { timestamps: true });
 var RestockHistory = (0, mongoose_1.model)('restockHistory', restockHistorySchema);
