@@ -8,11 +8,6 @@ var inventoryItemSchema = new mongoose_1.Schema({
         ref: 'inventoryCategory',
         required: true,
     },
-    vendor: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'user',
-        required: true,
-    },
     itemName: {
         type: String,
         unique: true,
@@ -20,7 +15,7 @@ var inventoryItemSchema = new mongoose_1.Schema({
     },
     quantity: {
         type: Number,
-        required: true,
+        default: 0,
     },
     measurementUnit: {
         type: String,
@@ -28,7 +23,7 @@ var inventoryItemSchema = new mongoose_1.Schema({
     },
     unitRate: {
         type: Number,
-        required: true,
+        default: 0,
     },
 }, { timestamps: true });
 var InventoryItem = (0, mongoose_1.model)('inventoryItem', inventoryItemSchema);

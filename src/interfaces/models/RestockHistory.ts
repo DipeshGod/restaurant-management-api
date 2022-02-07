@@ -1,17 +1,19 @@
 import mongoose from 'mongoose';
 
 export interface IRestockHistory {
-  inventoryItem: string;
+  inventoryItem: [string];
   inventoryCategory: string;
-  quantity: number;
-  unitRate: number;
+  vendor: string;
+  cashRemaining: number;
+  cashPaid: number;
 }
 
 export interface IRestockHistoryDoc extends mongoose.Document {
-  inventoryItem: string;
+  inventoryItem: [string];
   inventoryCategory: string;
-  quantity: number;
-  unitRate: number;
+  vendor: string;
+  cashRemaining: number;
+  cashPaid: number;
 }
 
 export interface IRestockHistoryModel

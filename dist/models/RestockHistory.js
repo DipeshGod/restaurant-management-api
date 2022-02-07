@@ -9,15 +9,20 @@ var restockHistorySchema = new mongoose_1.Schema({
         required: true,
     },
     inventoryItem: {
-        type: mongoose_1.Schema.Types.ObjectId,
+        type: [mongoose_1.Schema.Types.ObjectId],
         ref: 'inventoryItem',
         required: true,
     },
-    quantity: {
+    vendor: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
+    cashRemaining: {
         type: Number,
         required: true,
     },
-    unitRate: {
+    cashPaid: {
         type: Number,
         required: true,
     },

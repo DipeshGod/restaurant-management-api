@@ -13,15 +13,20 @@ const restockHistorySchema = new Schema(
       required: true,
     },
     inventoryItem: {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       ref: 'inventoryItem',
       required: true,
     },
-    quantity: {
+    vendor: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
+    },
+    cashRemaining: {
       type: Number,
       required: true,
     },
-    unitRate: {
+    cashPaid: {
       type: Number,
       required: true,
     },
