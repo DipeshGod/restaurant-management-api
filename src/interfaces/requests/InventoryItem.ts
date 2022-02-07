@@ -1,7 +1,7 @@
 export interface ICreateInventoryItemRequestBody {
   inventoryCategory: string;
   itemName: string;
-  measurementUnit: string;
+  measurementUnit: [string];
 }
 
 export interface IRestockInventoryItemRequestBody {

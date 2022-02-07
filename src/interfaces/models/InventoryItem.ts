@@ -4,7 +4,7 @@ export interface IInventoryItem {
   inventoryCategory: string;
   itemName: string;
   quantity: number;
-  measurementUnit: string;
+  measurementUnit: [string];
   unitRate: number;
 }
 
@@ -12,7 +12,7 @@ export interface IInventoryItemDoc extends mongoose.Document {
   inventoryCategory: string;
   itemName: string;
   quantity: number;
-  measurementUnit: string;
+  measurementUnit: [string];
   unitRate: number;
 }
 

@@ -40,34 +40,45 @@ exports.createInventoryCategoryController = void 0;
 var InventoryCategory_1 = require("../../models/InventoryCategory");
 var inventoryCategoryValidator_1 = require("../../utils/validators/inventoryCategoryValidator");
 var createInventoryCategoryController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var restroObjectId, inventoryCategory, err_1;
+    var restroObjectId, inventoryCategory, newInventoryCategory, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
+                _a.trys.push([0, 4, , 5]);
                 //validate request data
                 return [4 /*yield*/, (0, inventoryCategoryValidator_1.createInventoryCategoryValidator)(req.body)];
             case 1:
                 //validate request data
                 _a.sent();
                 restroObjectId = req.user.restroObjectId;
-                inventoryCategory = new InventoryCategory_1.InventoryCategory({
+                return [4 /*yield*/, InventoryCategory_1.InventoryCategory.findOne({
+                        restaurant: restroObjectId,
+                        name: req.body.name,
+                    })];
+            case 2:
+                inventoryCategory = _a.sent();
+                if (inventoryCategory) {
+                    return [2 /*return*/, res.status(400).json({
+                            message: 'Inventory Category already exists',
+                        })];
+                }
+                newInventoryCategory = new InventoryCategory_1.InventoryCategory({
                     restaurant: restroObjectId,
                     name: req.body.name,
                 });
-                return [4 /*yield*/, inventoryCategory.save()];
-            case 2:
+                return [4 /*yield*/, newInventoryCategory.save()];
+            case 3:
                 _a.sent();
                 res.status(201).json({
                     msg: 'Inventory category created successfully',
-                    inventoryCategory: inventoryCategory,
+                    newInventoryCategory: newInventoryCategory,
                 });
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 5];
+            case 4:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };

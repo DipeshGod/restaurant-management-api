@@ -37,45 +37,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.restockInventoryItemController = void 0;
-var InventoryItem_1 = require("../../models/InventoryItem");
-var inventoryItemValidator_1 = require("../../utils/validators/inventoryItemValidator");
 var restockInventoryItemController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var item, err_1;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 4, , 5]);
-                //1. validate request body
-                return [4 /*yield*/, (0, inventoryItemValidator_1.createInventoryItemValidator)(req.body)];
-            case 1:
-                //1. validate request body
-                _a.sent();
-                return [4 /*yield*/, InventoryItem_1.InventoryItem.findById(req.body.id)];
-            case 2:
-                item = _a.sent();
-                //3. if the item is not found, return error
-                if (!item) {
-                    return [2 /*return*/, res.status(404).json({
-                            message: 'Item not found',
-                        })];
-                }
-                //4. update the item
-                item.quantity = req.body.quantity;
-                item.unitRate = req.body.unitRate;
-                //5. save the item and also create restock history as a transaction
-                return [4 /*yield*/, item.save()];
-            case 3:
-                //5. save the item and also create restock history as a transaction
-                _a.sent();
-                //4. return the item
-                res.status(201).json({});
-                return [3 /*break*/, 5];
-            case 4:
-                err_1 = _a.sent();
-                res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+        try {
+            //1. validate request body
+            res.status(201).json({});
         }
+        catch (err) {
+            res.status(400).json({ err: err });
+        }
+        return [2 /*return*/];
     });
 }); };
 exports.restockInventoryItemController = restockInventoryItemController;

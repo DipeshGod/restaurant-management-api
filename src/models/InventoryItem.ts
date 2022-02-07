@@ -21,7 +21,7 @@ const inventoryItemSchema = new Schema(
       default: 0,
     },
     measurementUnit: {
-      type: String,
+      type: [String],
       required: true,
     },
     unitRate: {

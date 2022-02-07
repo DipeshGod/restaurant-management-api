@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import { ICreateInventoryItemRequestBody } from '../../interfaces/requests/InventoryItem';
 import { InventoryItem } from '../../models/InventoryItem';
-import { RestockHistory } from '../../models/RestockHistory';
 import { createInventoryItemValidator } from '../../utils/validators/inventoryItemValidator';
 
 const createInventoryItemController = async (

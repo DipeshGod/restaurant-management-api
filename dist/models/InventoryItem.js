@@ -18,7 +18,7 @@ var inventoryItemSchema = new mongoose_1.Schema({
         default: 0,
     },
     measurementUnit: {
-        type: String,
+        type: [String],
         required: true,
     },
     unitRate: {
