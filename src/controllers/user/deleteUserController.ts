@@ -13,19 +13,16 @@ const deleteUserController = async (
       return res.status(400).json({ msg: 'please provide valid id parameter' });
     }
 
-    //get the restaurant objectId from the user
-    const restroObjectId = req.user.restroObjectId;
-
-    //check if user is already on the database
-    const user = await User.findOneAndDelete({
-      id: id,
-      restaurant: restroObjectId,
-    });
+    // await user?.save();
+    const user = await User.findById(id);
 
     //if no user
     if (!user) {
       return res.status(400).json({ msg: 'User doesnt exists' });
     }
+
+    //delete user
+    await user.remove();
 
     res.status(200).json({ msg: 'User deleted successfully' });
   } catch (err: any) {

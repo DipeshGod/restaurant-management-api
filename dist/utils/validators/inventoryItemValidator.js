@@ -39,42 +39,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.restockInventoryItemValidator = exports.createInventoryItemValidator = void 0;
+exports.stockInventoryItemValidator = void 0;
 var joi_1 = __importDefault(require("joi"));
-var createInventoryItemValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var inventoryItemSchema;
+var stockInventoryItemValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var stockInventoryItemSchema;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                inventoryItemSchema = joi_1.default.object({
-                    inventoryCategory: joi_1.default.string().required(),
-                    itemName: joi_1.default.string().required().min(3).max(40),
-                    measurementUnit: joi_1.default.array().items(joi_1.default.string()).required(),
-                });
-                return [4 /*yield*/, inventoryItemSchema.validateAsync(data)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-exports.createInventoryItemValidator = createInventoryItemValidator;
-var restockInventoryItemValidator = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var restockInventoryItemSchema;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                restockInventoryItemSchema = joi_1.default.object({
-                    inventoryItem: joi_1.default.array().items(joi_1.default.string()).required(),
-                    quantity: joi_1.default.number().required(),
-                    unitRate: joi_1.default.number().required(),
+                stockInventoryItemSchema = joi_1.default.object({
+                    newItems: joi_1.default.array().items(joi_1.default.object({
+                        inventoryCategory: joi_1.default.string().required(),
+                        itemName: joi_1.default.string().required(),
+                        quantity: joi_1.default.number().required(),
+                        measurementUnit: joi_1.default.array().items(joi_1.default.string()).required(),
+                        unitRate: joi_1.default.number().required(),
+                    })),
+                    updateItems: joi_1.default.array().items(joi_1.default.object({
+                        id: joi_1.default.string().required(),
+                        measurementUnit: joi_1.default.string().required(),
+                        quantity: joi_1.default.number().required(),
+                        unitRate: joi_1.default.number().required(),
+                    })),
                     cashPaid: joi_1.default.number().required(),
                     cashRemaining: joi_1.default.number().required(),
                     vendor: joi_1.default.string().required(),
                     paidTotal: joi_1.default.boolean().required(),
                     billImage: joi_1.default.string().optional(),
                 });
-                return [4 /*yield*/, restockInventoryItemSchema.validateAsync(data)];
+                return [4 /*yield*/, stockInventoryItemSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];
         }
     });
 }); };
-exports.restockInventoryItemValidator = restockInventoryItemValidator;
+exports.stockInventoryItemValidator = stockInventoryItemValidator;

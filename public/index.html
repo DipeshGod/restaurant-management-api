@@ -181,17 +181,12 @@
 
         <div id="collapseFour" class="collapse hide" aria-labelledby="headingFour" data-parent="#accordionExample">
           <div class="card-body">
-            <h6>Create New Inventory Item</h6>
-            <h6 class="font-weight-normal">endpoint : /inventory_item</h6>
+            <h6>Stock Inventory Items</h6>
+            <h6 class="font-weight-normal">endpoint : /inventory_item/stock</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: itemName: ( string , required , unique ) , inventoryCategory: (
-              string ,
-              required ) ,
-              measurementUnit: ( [string] , required )
-            </h6>
-            </h6>
-            </h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/restock.PNG' height="300" width="300" />
           </div>
           <div class="card-body">
             <h6>Get Inventory Items By Category</h6>

@@ -44,7 +44,9 @@ var getUserByRestaurantIdController = function (req, res) { return __awaiter(voi
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, User_1.User.find({ restaurant: req.user.restroObjectId })];
+                return [4 /*yield*/, User_1.User.find({
+                        restaurant: req.user.restroObjectId,
+                    }).select('-password -restaurant')];
             case 1:
                 users = _a.sent();
                 res.json({ users: users });
