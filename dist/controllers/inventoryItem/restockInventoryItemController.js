@@ -37,16 +37,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.restockInventoryItemController = void 0;
+var inventoryItemValidator_1 = require("../../utils/validators/inventoryItemValidator");
 var restockInventoryItemController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var inventoryItem, err_1;
     return __generator(this, function (_a) {
-        try {
-            //1. validate request body
-            res.status(201).json({});
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                //1. validate request body
+                return [4 /*yield*/, (0, inventoryItemValidator_1.restockInventoryItemValidator)(req.body)];
+            case 1:
+                //1. validate request body
+                _a.sent();
+                inventoryItem = req.body.inventoryItem;
+                //3. after step 2 is completed successfully, create restockHistory document
+                res.status(201).json({});
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                res.status(400).json({ err: err_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
-        catch (err) {
-            res.status(400).json({ err: err });
-        }
-        return [2 /*return*/];
     });
 }); };
 exports.restockInventoryItemController = restockInventoryItemController;
