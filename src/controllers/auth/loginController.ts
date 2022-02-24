@@ -57,7 +57,15 @@ const loginController = async (
 
     //if all successfull return token
     const token = assignToken(user);
-    res.json({ msg: 'login successfull', token: token, user });
+
+    //remove password from user object
+    const { password, ...userWithoutPassword } = user.toObject();
+
+    res.json({
+      msg: 'login successfull',
+      token: token,
+      user: userWithoutPassword,
+    });
   } catch (err) {
     res.status(400).json({ err });
   }
