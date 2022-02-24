@@ -39,33 +39,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUserController = void 0;
 var User_1 = require("../../models/User");
 var deleteUserController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, restroObjectId, user, err_1;
+    var id, user, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 3, , 4]);
                 id = req.params.id;
                 if (!id) {
                     return [2 /*return*/, res.status(400).json({ msg: 'please provide valid id parameter' })];
                 }
-                restroObjectId = req.user.restroObjectId;
-                return [4 /*yield*/, User_1.User.findOneAndDelete({
-                        id: id,
-                        restaurant: restroObjectId,
-                    })];
+                return [4 /*yield*/, User_1.User.findById(id)];
             case 1:
                 user = _a.sent();
                 //if no user
                 if (!user) {
                     return [2 /*return*/, res.status(400).json({ msg: 'User doesnt exists' })];
                 }
-                res.status(200).json({ msg: 'User deleted successfully' });
-                return [3 /*break*/, 3];
+                //delete user
+                return [4 /*yield*/, user.remove()];
             case 2:
+                //delete user
+                _a.sent();
+                res.status(200).json({ msg: 'User deleted successfully' });
+                return [3 /*break*/, 4];
+            case 3:
                 err_1 = _a.sent();
                 res.status(400).json({ err: err_1 });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
