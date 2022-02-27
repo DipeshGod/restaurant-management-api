@@ -29,7 +29,7 @@ const stockInventoryItemController = async (
           item.id,
           {
             $set: {
-              measurementUnit: item.measurementUnit,
+              measurementUnit: [item.measurementUnit],
               quantity: item.quantity,
               unitRate: item.unitRate,
             },
@@ -47,7 +47,7 @@ const stockInventoryItemController = async (
           }
         );
       },
-      (err) => {
+      async (err) => {
         if (err) {
           return res.status(500).json({
             message: 'Error while updating inventory items',
@@ -59,9 +59,12 @@ const stockInventoryItemController = async (
           user: req.user._id,
           inventoryItem: [...newItems, ...updateItems],
           paidTotal: req.body.paidTotal,
+          cashPaid: req.body.cashPaid,
           vendor: req.body.vendor,
           cashRemaining: req.body.cashRemaining,
         });
+
+        await restockHistory.save();
       }
     );
 

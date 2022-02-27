@@ -76,7 +76,7 @@ var stockInventoryItemController = function (req, res) { return __awaiter(void 0
                 async_1.default.eachSeries(req.body.updateItems, function (item, callback) {
                     InventoryItem_1.InventoryItem.findByIdAndUpdate(item.id, {
                         $set: {
-                            measurementUnit: item.measurementUnit,
+                            measurementUnit: [item.measurementUnit],
                             quantity: item.quantity,
                             unitRate: item.unitRate,
                         },
@@ -89,22 +89,32 @@ var stockInventoryItemController = function (req, res) { return __awaiter(void 0
                         }
                         callback(null);
                     });
-                }, function (err) {
-                    if (err) {
-                        return res.status(500).json({
-                            message: 'Error while updating inventory items',
-                            err: err,
-                        });
-                    }
-                    //4. create restockHistory document
-                    var restockHistory = new RestockHistory_1.RestockHistory({
-                        user: req.user._id,
-                        inventoryItem: __spreadArray(__spreadArray([], newItems_1, true), updateItems_1, true),
-                        paidTotal: req.body.paidTotal,
-                        vendor: req.body.vendor,
-                        cashRemaining: req.body.cashRemaining,
+                }, function (err) { return __awaiter(void 0, void 0, void 0, function () {
+                    var restockHistory;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (err) {
+                                    return [2 /*return*/, res.status(500).json({
+                                            message: 'Error while updating inventory items',
+                                            err: err,
+                                        })];
+                                }
+                                restockHistory = new RestockHistory_1.RestockHistory({
+                                    user: req.user._id,
+                                    inventoryItem: __spreadArray(__spreadArray([], newItems_1, true), updateItems_1, true),
+                                    paidTotal: req.body.paidTotal,
+                                    cashPaid: req.body.cashPaid,
+                                    vendor: req.body.vendor,
+                                    cashRemaining: req.body.cashRemaining,
+                                });
+                                return [4 /*yield*/, restockHistory.save()];
+                            case 1:
+                                _a.sent();
+                                return [2 /*return*/];
+                        }
                     });
-                });
+                }); });
                 res.status(201).json({});
                 return [3 /*break*/, 5];
             case 4:
