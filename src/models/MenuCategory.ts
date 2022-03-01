@@ -1,22 +1,31 @@
-import { string } from "joi";
-import { Schema, model } from "mongoose";
-import { IMenuCategoryDoc, IMenuCategoryModel } from "../interfaces/models/MenuCategory";
+import { string } from 'joi';
+import { Schema, model } from 'mongoose';
+import {
+  IMenuCategoryDoc,
+  IMenuCategoryModel,
+} from '../interfaces/models/MenuCategory';
 
-const menuCategorySchema = new Schema({
+const menuCategorySchema = new Schema(
+  {
     name: {
-        type: string,
-        required: true
+      type: String,
+      required: true,
     },
     description: {
-        type: string
+      type: String,
     },
     restaurant: {
-        required: true,
-        type: Schema.Types.ObjectId,
-        ref: 'restaurant'
-    }
-}, { timestamps: true })
+      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'restaurant',
+    },
+  },
+  { timestamps: true }
+);
 
-const MenuCategory = model<IMenuCategoryDoc, IMenuCategoryModel>('menuCategory', menuCategorySchema);
+const MenuCategory = model<IMenuCategoryDoc, IMenuCategoryModel>(
+  'menuCategory',
+  menuCategorySchema
+);
 
-export { MenuCategory }
+export { MenuCategory };

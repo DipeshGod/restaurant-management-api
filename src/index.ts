@@ -10,6 +10,7 @@ import { inventoryCategoryRouter } from './routes/inventoryCategory';
 import { inventoryItemRouter } from './routes/inventoryItem';
 import { constantsRouter } from './routes/constants';
 import { adminRouter } from './routes/admin';
+import { menuCategoryRouter } from './routes/menuCategory';
 
 declare global {
   namespace Express {
@@ -51,6 +52,7 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/inventory_category', inventoryCategoryRouter);
 app.use('/api/inventory_item', inventoryItemRouter);
+app.use('/api/menu_category', menuCategoryRouter);
 app.use('/api/admin', adminRouter);
 
 const PORT = process.env.PORT || 5000;

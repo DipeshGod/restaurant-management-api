@@ -45,7 +45,7 @@ export const updateUserValidator = async (data: any) => {
           .valid(
             'Owner',
             'Inventory Manager',
-            'Vendors',
+            'Vendor',
             'Waiter',
             'Kitchen Order Manager',
             'Bar Order Manager',
