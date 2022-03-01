@@ -15,6 +15,7 @@ var inventoryCategory_1 = require("./routes/inventoryCategory");
 var inventoryItem_1 = require("./routes/inventoryItem");
 var constants_1 = require("./routes/constants");
 var admin_1 = require("./routes/admin");
+var menuCategory_1 = require("./routes/menuCategory");
 //load environment variables
 dotenv_1.default.config();
 //initialize express
@@ -40,6 +41,7 @@ app.use('/api/user', user_1.userRouter);
 app.use('/api/auth', auth_1.authRouter);
 app.use('/api/inventory_category', inventoryCategory_1.inventoryCategoryRouter);
 app.use('/api/inventory_item', inventoryItem_1.inventoryItemRouter);
+app.use('/api/menu_category', menuCategory_1.menuCategoryRouter);
 app.use('/api/admin', admin_1.adminRouter);
 var PORT = process.env.PORT || 5000;
 var server;

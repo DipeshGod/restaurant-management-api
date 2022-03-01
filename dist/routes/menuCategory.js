@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.menuCategoryRouter = void 0;
+var express_1 = require("express");
+var authenticate_1 = require("../middlewares/authenticate");
+var updateMenuCategoryController_1 = require("../controllers/menuCategory/updateMenuCategoryController");
+var createMenuCategoryController_1 = require("../controllers/menuCategory/createMenuCategoryController");
+var getMenuCategoryByRestaurantIdController_1 = require("../controllers/menuCategory/getMenuCategoryByRestaurantIdController");
+var authorization_1 = require("../middlewares/authorization");
+var router = (0, express_1.Router)();
+exports.menuCategoryRouter = router;
+router.get('/', [authenticate_1.authentication], getMenuCategoryByRestaurantIdController_1.getMenuCategoryByRestaurantIdController);
+router.post('/', [authenticate_1.authentication, authorization_1.isInventoryManager], createMenuCategoryController_1.createMenuCategoryController);
+router.put('/', [authenticate_1.authentication], updateMenuCategoryController_1.updateMenuCategoryController);

@@ -80,7 +80,7 @@ var updateUserValidator = function (data) { return __awaiter(void 0, void 0, voi
                         .optional()
                         .items(joi_1.default
                         .string()
-                        .valid('Owner', 'Inventory Manager', 'Vendors', 'Waiter', 'Kitchen Order Manager', 'Bar Order Manager', 'Cashier', 'Accountant', 'Members')),
+                        .valid('Owner', 'Inventory Manager', 'Vendor', 'Waiter', 'Kitchen Order Manager', 'Bar Order Manager', 'Cashier', 'Accountant', 'Members')),
                 });
                 return [4 /*yield*/, updateUserSchema.validateAsync(data)];
             case 1: return [2 /*return*/, _a.sent()];
