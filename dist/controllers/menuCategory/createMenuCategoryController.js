@@ -53,28 +53,28 @@ var createMenuCategoryController = function (req, res) { return __awaiter(void 0
                 return [4 /*yield*/, MenuCategory_1.MenuCategory.find({ name: req.body.name })];
             case 2:
                 menuCategory = _a.sent();
-                if (menuCategory) {
+                if (menuCategory.length > 0) {
                     return [2 /*return*/, res.status(400).json({
-                            message: "Menu category already exists"
+                            message: 'Menu category already exists',
                         })];
                 }
-                return [4 /*yield*/, new MenuCategory_1.MenuCategory({
-                        name: req.body.name,
-                        description: req.body.description,
-                        restaurant: req.user.restroObjectId
-                    })
-                        .save()];
+                newMenuCategory = new MenuCategory_1.MenuCategory({
+                    name: req.body.name,
+                    description: req.body.description,
+                    restaurant: req.user.restroObjectId,
+                });
+                return [4 /*yield*/, newMenuCategory.save()];
             case 3:
-                newMenuCategory = _a.sent();
+                _a.sent();
                 res.status(200).json({
                     msg: 'Menu Category Created Successfully',
-                    menuCategory: newMenuCategory
+                    menuCategory: newMenuCategory,
                 });
                 return [3 /*break*/, 5];
             case 4:
                 err_1 = _a.sent();
                 res.status(400).json({
-                    err: err_1
+                    err: err_1,
                 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];

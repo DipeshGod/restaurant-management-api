@@ -27,16 +27,16 @@
 
       <!-- Restaurant  -->
       <div class="card">
-        <div class="card-header" id="headingFive">
+        <div class="card-header" id="headingEleven">
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseEleven"
               aria-expanded="true" aria-controls="collapseFive">
               Restaurant Endpoints
             </button>
           </h5>
         </div>
 
-        <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordionExample">
+        <div id="collapseEleven" class="collapse hide" aria-labelledby="headingEleven" data-parent="#accordionExample">
           <div class="card-body">
             <h6>Get All Restaurant</h6>
             <h6 class="font-weight-normal">endpoint : /restaurant</h6>
@@ -69,10 +69,8 @@
             <h6 class="font-weight-normal">endpoint : /user</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : [ 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: name ( string , required ) , mobileNumber: (string , required) password
-              ( string , required ) , role (
-              array
-              , required ) , salary (number , optional)</h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/createUser.PNG' />
           </div>
           <div class="card-body">
             <h6>Get All Users Of Restaurant</h6>
@@ -85,11 +83,8 @@
             <h6 class="font-weight-normal">endpoint : /user</h6>
             <h6 class="font-weight-normal">method : PUT</h6>
             <h6 class="font-weight-normal">permissions : [ 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: id ( string , required ), mobileNumber: ( string , required ) , name (
-              string , optional ) , password ( string
-              , optional ) , role (
-              array
-              , optional ) , salary (number , optional)</h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/updateUser.PNG' />
           </div>
           <div class="card-body">
             <h6>Delete User</h6>
@@ -124,8 +119,8 @@
             <h6 class="font-weight-normal">endpoint : /auth/login</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : ALL</h6>
-            <h6 class="font-weight-normal">body: restaurant ( id, string, required ) mobileNumber ( string , required ),
-              password ( string , required )</h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/Login.PNG' />
           </div>
         </div>
       </div>
@@ -148,8 +143,8 @@
             <h6 class="font-weight-normal">endpoint : /inventory_category</h6>
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: name: ( string , required )
-            </h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/createInventoryCategory.PNG' />
           </div>
           <div class="card-body">
             <h6>Get All Inventory Category</h6>
@@ -162,7 +157,8 @@
             <h6 class="font-weight-normal">endpoint : /inventory_category</h6>
             <h6 class="font-weight-normal">method : PUT</h6>
             <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
-            <h6 class="font-weight-normal">body: id ( string , required) , name ( string , required )</h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/updateInventoryCategory.PNG' />
           </div>
         </div>
       </div>
@@ -186,13 +182,45 @@
             <h6 class="font-weight-normal">method : POST</h6>
             <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
             <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
-            <img src='./images/restock.PNG' height="300" width="300" />
+            <img src='./images/restock.PNG' />
           </div>
           <div class="card-body">
             <h6>Get Inventory Items By Category</h6>
             <h6 class="font-weight-normal">endpoint : /inventory_item</h6>
             <h6 class="font-weight-normal">method : GET</h6>
             <h6 class="font-weight-normal">query : category_id</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
+          </div>
+
+        </div>
+      </div>
+      <!-- inventory item api docs-->
+
+      <!-- inventory item api docs -->
+      <div class="card">
+        <div class="card-header" id="headingFive">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"
+              aria-expanded="true" aria-controls="collapseFive">
+              Order Management
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseFive" class="collapse hide" aria-labelledby="headingFive" data-parent="#accordionExample">
+          <div class="card-body">
+            <h6>Create Menu Category</h6>
+            <h6 class="font-weight-normal">endpoint : /menu_category/stock</h6>
+            <h6 class="font-weight-normal">method : POST</h6>
+            <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
+            <h6 class="font-weight-normal" style="color: chocolate;">Request Body</h6>
+            <img src='./images/createMenuCategory.PNG' />
+          </div>
+          <div class="card-body">
+            <h6>Get Categories</h6>
+            <h6 class="font-weight-normal">endpoint : /menu_category</h6>
+            <h6 class="font-weight-normal">method : GET</h6>
+            <h6 class="font-weight-normal">query : menu_id</h6>
             <h6 class="font-weight-normal">permissions : [ 'inventoryManager' , 'owner' ]</h6>
           </div>
 
