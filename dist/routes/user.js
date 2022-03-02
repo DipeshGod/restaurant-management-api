@@ -6,12 +6,14 @@ var createUserController_1 = require("../controllers/user/createUserController")
 var deleteUserController_1 = require("../controllers/user/deleteUserController");
 var getCurrentUser_1 = require("../controllers/user/getCurrentUser");
 var getUserByRestaurantIdController_1 = require("../controllers/user/getUserByRestaurantIdController");
+var getVendorByRestaurantId_1 = require("../controllers/user/getVendorByRestaurantId");
 var updateUserController_1 = require("../controllers/user/updateUserController");
 var authenticate_1 = require("../middlewares/authenticate");
 var authorization_1 = require("../middlewares/authorization");
 var router = (0, express_1.Router)();
 exports.userRouter = router;
 router.get('/currentUser', [authenticate_1.authentication], getCurrentUser_1.getCurrentUser);
+router.get('/vendors', [authenticate_1.authentication, authorization_1.isInventoryManager], getVendorByRestaurantId_1.getVendorByRestaurantIdController);
 router.post('/', [authenticate_1.authentication, authorization_1.isOwner], createUserController_1.createUserController);
 router.put('/', [authenticate_1.authentication, authorization_1.isOwner], updateUserController_1.updateUserController);
 router.get('/', [authenticate_1.authentication, authorization_1.isOwner], getUserByRestaurantIdController_1.getUserByRestaurantIdController);
